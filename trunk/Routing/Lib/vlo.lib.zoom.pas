@@ -34,7 +34,7 @@ unit vlo.lib.zoom;
 interface
 
 uses
-  Classes, Windows, uVertex;
+  Classes, Windows, vlo.lib.vertex;
 
 type
   TPointR = record
