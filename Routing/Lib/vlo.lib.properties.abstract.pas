@@ -34,7 +34,7 @@ unit vlo.lib.properties.abstract;
 interface
 
 uses
-  uCLoner, uXMLSerializer, XMLDoc, XMLIntf, Graphics, Classes;
+  vlo.lib.cloner.contract, vlo.lib.XML.Serializer, XMLDoc, XMLIntf, Graphics, Classes;
 
 type
   TAbstractProperty = class(TInterfacedObject, ISerializable, IAssignable)
