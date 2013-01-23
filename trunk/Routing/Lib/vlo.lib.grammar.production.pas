@@ -1,5 +1,5 @@
-(*
-  * Copyright (c) 2010-2012 Thundax P-Zaggy (VLO Framework)
+﻿(*
+  * Copyright (c) 2010-2013 Thundax P-Zaggy (VLO Framework)
   * All rights reserved.
   *
   * Redistribution and use in source and binary forms, with or without
@@ -29,41 +29,48 @@
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *)
-unit pzaggy.lib.fonts;
+unit vlo.lib.grammar.production;
 
 interface
 
-uses
-  Graphics, StdCtrls, Dialogs;
-
-procedure AssignFont(var FontTarget: TFont; FontSource: TFont);
-procedure AssignEditFont(var FontTarget: TEdit; FontSource: TFont);
-procedure AssignDialogFont(var FontTarget: TFontDialog; FontSource: TFont);
+type
+  TProductionGrammar = class(TObject)
+  private
+    FToTransition: string;
+    FFromTransition: string;
+    procedure SetFromTransition(const Value: string);
+    procedure SetToTransition(const Value: string);
+  public
+    property FromTransition: string read FFromTransition write SetFromTransition;
+    property ToTransition: string read FToTransition write SetToTransition;
+    constructor Create(FromTransition: string; ToTransition: string);
+    function ToString(): string; override;
+  end;
 
 implementation
 
-procedure AssignFont(var FontTarget: TFont; FontSource: TFont);
+{ TProductionGrammar }
+
+constructor TProductionGrammar.Create(FromTransition, ToTransition: string);
 begin
-  FontTarget.Name := FontSource.name;
-  FontTarget.Size := FontSource.Size;
-  FontTarget.Style := FontSource.Style;
-  FontTarget.Color := FontSource.Color;
+  SetFromTransition(FromTransition);
+  SetToTransition(ToTransition);
 end;
 
-procedure AssignEditFont(var FontTarget: TEdit; FontSource: TFont);
+procedure TProductionGrammar.SetFromTransition(const Value: string);
 begin
-  FontTarget.Text := FontSource.Name;
-  FontTarget.Font.Name := FontSource.Name;
-  FontTarget.Font.Style := FontSource.Style;
-  FontTarget.Font.Color := FontSource.Color;
+  FFromTransition := Value;
 end;
 
-procedure AssignDialogFont(var FontTarget: TFontDialog; FontSource: TFont);
+procedure TProductionGrammar.SetToTransition(const Value: string);
 begin
-  FontTarget.Font.Name := FontSource.Name;
-  FontTarget.Font.Size := FontSource.Size;
-  FontTarget.Font.Style := FontSource.Style;
-  FontTarget.Font.Color := FontSource.Color;
+  FToTransition := Value;
 end;
+
+function TProductionGrammar.ToString: string;
+begin
+  result := FFromTransition + ' → ' + FToTransition;
+end;
+
 
 end.
