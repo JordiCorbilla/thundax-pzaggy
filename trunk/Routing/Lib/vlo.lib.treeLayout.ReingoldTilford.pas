@@ -34,7 +34,7 @@ unit vlo.lib.treeLayout.ReingoldTilford;
 interface
 
 uses
-  uGraph, uNode, Generics.Collections, vlo.lib.treeLayout.helper;
+  uGraph, vlo.lib.Node, Generics.Collections, vlo.lib.treeLayout.helper;
 
 type
   TTreeJustification = (tTop, tCenter, TBottom);

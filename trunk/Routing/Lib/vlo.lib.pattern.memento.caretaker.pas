@@ -29,34 +29,23 @@
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *)
-unit vlo.lib.treeLayout;
+unit vlo.lib.pattern.memento.caretaker;
 
 interface
 
 uses
-  uGraph, vlo.lib.Node, uConnector;
+  vlo.lib.Node, contnrs, uConnector, vlo.lib.Node.list, vlo.lib.pattern.memento;
 
 type
-  TInfoNode = class(TObject)
-  private
-    FNode: TNode;
-    FSubtreeWidth: Double;
-    procedure SetNode(const Value: TNode);
-    procedure SetSubtreeWidth(const Value: Double);
+  TCareTaker = class(TObject)
+    FSavedStates: TObjectList;
   public
-    property Node: TNode read FNode write SetNode;
-    property SubtreeWidth: Double read FSubtreeWidth write SetSubtreeWidth;
-    constructor Create(Node: TNode);
-  end;
-
-  TLayeredTree = class(TObject)
-  private
-    FGraph: TGraph;
-    j: integer;
-    function recursiveNodes(Node: TNode; infoNode: TInfoNode): Boolean;
-  public
-    constructor Create(graph: TGraph);
-    procedure Layout;
+    constructor Create();
+    destructor Destroy(); override;
+    procedure addMemento(memento: TMemento);
+    function thereAreMementos(): boolean;
+    function getLastMemento(): TMemento;
+    procedure RemoveLastMemento();
   end;
 
 implementation
@@ -64,62 +53,40 @@ implementation
 uses
   SysUtils;
 
-{ TLayeredTree }
+{ TCareTaker }
 
-constructor TLayeredTree.Create(graph: TGraph);
+procedure TCareTaker.addMemento(memento: TMemento);
 begin
-  FGraph := graph;
-  j := 0;
+  FSavedStates.Add(memento);
 end;
 
-procedure TLayeredTree.Layout;
-var
-  Node: TNode;
-  infoNode: TInfoNode;
+constructor TCareTaker.Create;
 begin
-  // Get the root node
-  infoNode := nil;
-  Node := FGraph.getInitialState();
-  recursiveNodes(Node, infoNode);
+  FSavedStates := TObjectList.Create();
 end;
 
-function TLayeredTree.recursiveNodes(Node: TNode; infoNode: TInfoNode): Boolean;
-var
-  i: integer;
+destructor TCareTaker.Destroy;
 begin
-  for i := 0 to FGraph.ConnectorList.count - 1 do
-  begin
-    if FGraph.ConnectorList.Items[i].SourceNode = Node then
-    begin
-      // target := ConnectorList.Items[i].TargetNode;
-      // if FGraph.ConnectorList.isLeaf(target) then
-      // begin
-      // formatTreeNode(
-      // end;
-      FGraph.ConnectorList.Items[i].SourceNode.properties.description.Text := IntToStr(j);
-      inc(j);
-      recursiveNodes(FGraph.ConnectorList.Items[i].TargetNode, infoNode);
-
-    end;
-  end;
-  Result := true;
+  FreeAndNil(FSavedStates);
+  inherited;
 end;
 
-{ TInfoNode }
-
-constructor TInfoNode.Create(Node: TNode);
+function TCareTaker.getLastMemento(): TMemento;
 begin
-  SetNode(Node);
+  result := nil;
+  if (FSavedStates.Count > 0) then
+    result := (FSavedStates.Items[FSavedStates.Count - 1] as TMemento);
 end;
 
-procedure TInfoNode.SetNode(const Value: TNode);
+procedure TCareTaker.RemoveLastMemento;
 begin
-  FNode := Value;
+  if (FSavedStates.Count > 0) then
+    FSavedStates.Remove(FSavedStates.Items[FSavedStates.Count - 1]);
 end;
 
-procedure TInfoNode.SetSubtreeWidth(const Value: Double);
+function TCareTaker.thereAreMementos: boolean;
 begin
-  FSubtreeWidth := Value;
+  result := (FSavedStates.Count > 0);
 end;
 
 end.
