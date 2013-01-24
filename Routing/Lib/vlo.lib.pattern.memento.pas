@@ -29,34 +29,23 @@
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *)
-unit vlo.lib.treeLayout;
+unit vlo.lib.pattern.memento;
 
 interface
 
 uses
-  uGraph, vlo.lib.Node, uConnector;
+  vlo.lib.Node, contnrs, uConnector, vlo.lib.Node.list;
 
 type
-  TInfoNode = class(TObject)
-  private
-    FNode: TNode;
-    FSubtreeWidth: Double;
-    procedure SetNode(const Value: TNode);
-    procedure SetSubtreeWidth(const Value: Double);
+  TMemento = class(TObject)
+    FboxListState: TNodeList;
+    FConnectorListState: TConnectorList;
   public
-    property Node: TNode read FNode write SetNode;
-    property SubtreeWidth: Double read FSubtreeWidth write SetSubtreeWidth;
-    constructor Create(Node: TNode);
-  end;
-
-  TLayeredTree = class(TObject)
-  private
-    FGraph: TGraph;
-    j: integer;
-    function recursiveNodes(Node: TNode; infoNode: TInfoNode): Boolean;
-  public
-    constructor Create(graph: TGraph);
-    procedure Layout;
+    constructor Create(boxListState: TNodeList; ConnectorListState: TConnectorList);
+    destructor Destroy(); override;
+    procedure ClearObjects();
+    function getSavedBoxState(): TNodeList;
+    function getSavedConnectorState(): TConnectorList;
   end;
 
 implementation
@@ -64,62 +53,35 @@ implementation
 uses
   SysUtils;
 
-{ TLayeredTree }
+{ TMemento }
 
-constructor TLayeredTree.Create(graph: TGraph);
+procedure TMemento.ClearObjects;
 begin
-  FGraph := graph;
-  j := 0;
+  if Assigned(Self.FboxListState) then
+    FreeAndNil(Self.FboxListState);
+  if Assigned(Self.FConnectorListState) then
+    FreeAndNil(Self.FConnectorListState);
 end;
 
-procedure TLayeredTree.Layout;
-var
-  Node: TNode;
-  infoNode: TInfoNode;
+constructor TMemento.Create(boxListState: TNodeList; ConnectorListState: TConnectorList);
 begin
-  // Get the root node
-  infoNode := nil;
-  Node := FGraph.getInitialState();
-  recursiveNodes(Node, infoNode);
+  Self.FboxListState := boxListState.Clone;
+  Self.FConnectorListState := ConnectorListState.Clone;
 end;
 
-function TLayeredTree.recursiveNodes(Node: TNode; infoNode: TInfoNode): Boolean;
-var
-  i: integer;
+destructor TMemento.Destroy;
 begin
-  for i := 0 to FGraph.ConnectorList.count - 1 do
-  begin
-    if FGraph.ConnectorList.Items[i].SourceNode = Node then
-    begin
-      // target := ConnectorList.Items[i].TargetNode;
-      // if FGraph.ConnectorList.isLeaf(target) then
-      // begin
-      // formatTreeNode(
-      // end;
-      FGraph.ConnectorList.Items[i].SourceNode.properties.description.Text := IntToStr(j);
-      inc(j);
-      recursiveNodes(FGraph.ConnectorList.Items[i].TargetNode, infoNode);
-
-    end;
-  end;
-  Result := true;
+  inherited;
 end;
 
-{ TInfoNode }
-
-constructor TInfoNode.Create(Node: TNode);
+function TMemento.getSavedBoxState: TNodeList;
 begin
-  SetNode(Node);
+  result := Self.FboxListState;
 end;
 
-procedure TInfoNode.SetNode(const Value: TNode);
+function TMemento.getSavedConnectorState: TConnectorList;
 begin
-  FNode := Value;
-end;
-
-procedure TInfoNode.SetSubtreeWidth(const Value: Double);
-begin
-  FSubtreeWidth := Value;
+  result := Self.FConnectorListState;
 end;
 
 end.
