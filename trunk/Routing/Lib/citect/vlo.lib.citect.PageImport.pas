@@ -34,7 +34,7 @@ unit vlo.lib.citect.PageImport;
 interface
 
 uses
-  uNode, uLog;
+  vlo.lib.Node, vlo.lib.logging, vlo.lib.Node.list;
 
 type
   TCitectPageImport = class(TObject)

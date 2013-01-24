@@ -34,7 +34,7 @@ unit vlo.lib.treeLayout.ReingoldTilford;
 interface
 
 uses
-  uGraph, vlo.lib.Node, Generics.Collections, vlo.lib.treeLayout.helper;
+  vlo.lib.Graph, vlo.lib.Node, Generics.Collections, vlo.lib.treeLayout.helper;
 
 type
   TTreeJustification = (tTop, tCenter, TBottom);
@@ -81,7 +81,7 @@ type
 implementation
 
 uses
-  uConnector, SysUtils, Math;
+  vlo.lib.Connector, SysUtils, Math;
 
 { TReingoldTilfordAlgorithm }
 

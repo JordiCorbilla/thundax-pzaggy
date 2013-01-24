@@ -29,59 +29,64 @@
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *)
-unit vlo.lib.pattern.memento;
+unit vlo.lib.Math;
 
 interface
 
-uses
-  vlo.lib.Node, contnrs, vlo.lib.Connector, vlo.lib.Node.list;
+uses types, Math;
 
-type
-  TMemento = class(TObject)
-    FboxListState: TNodeList;
-    FConnectorListState: TConnectorList;
-  public
-    constructor Create(boxListState: TNodeList; ConnectorListState: TConnectorList);
-    destructor Destroy(); override;
-    procedure ClearObjects();
-    function getSavedBoxState(): TNodeList;
-    function getSavedConnectorState(): TConnectorList;
-  end;
+function Comparar(Value1, Value2: double; MethodComp: string): boolean;
+
+const
+    RealMargin = 0.000001; //1e-6
 
 implementation
 
-uses
-  SysUtils;
-
-{ TMemento }
-
-procedure TMemento.ClearObjects;
+function Comparar(Value1, Value2: double; MethodComp: string): boolean;
+var
+    ret: boolean;
 begin
-  if Assigned(Self.FboxListState) then
-    FreeAndNil(Self.FboxListState);
-  if Assigned(Self.FConnectorListState) then
-    FreeAndNil(Self.FConnectorListState);
-end;
-
-constructor TMemento.Create(boxListState: TNodeList; ConnectorListState: TConnectorList);
-begin
-  Self.FboxListState := boxListState.Clone;
-  Self.FConnectorListState := ConnectorListState.Clone;
-end;
-
-destructor TMemento.Destroy;
-begin
-  inherited;
-end;
-
-function TMemento.getSavedBoxState: TNodeList;
-begin
-  result := Self.FboxListState;
-end;
-
-function TMemento.getSavedConnectorState: TConnectorList;
-begin
-  result := Self.FConnectorListState;
+    ret := false;
+    if MethodComp = '=' then
+    begin
+        case CompareValue(Value1, Value2, RealMargin) of
+            EqualsValue: ret := true;
+        end;
+    end
+    else if MethodComp = '<>' then
+    begin
+        case CompareValue(Value1, Value2, RealMargin) of
+            LessThanValue: ret := true;
+            GreaterThanValue: ret := true;
+        end;
+    end
+    else if MethodComp = '>=' then
+    begin
+        case CompareValue(Value1, Value2, RealMargin) of
+            EqualsValue: ret := true;
+            GreaterThanValue: ret := true;
+        end;
+    end
+    else if MethodComp = '>' then
+    begin
+        case CompareValue(Value1, Value2, RealMargin) of
+            GreaterThanValue: ret := true;
+        end;
+    end
+    else if MethodComp = '<=' then
+    begin
+        case CompareValue(Value1, Value2, RealMargin) of
+            LessThanValue: ret := true;
+            EqualsValue: ret := true;
+        end;
+    end
+    else if MethodComp = '<' then
+    begin
+        case CompareValue(Value1, Value2, RealMargin) of
+            LessThanValue: ret := true;
+        end;
+    end;
+    result := ret;
 end;
 
 end.
