@@ -562,7 +562,7 @@ begin
     if not connector.Edge.ClassNameIs('TAbstractSimpleDoubleLinkedArrowEdge') and not connector.Edge.ClassNameIs('TAbstractDottedDoubleLinkedArrowEdge') then
       if (connector.SourceNode.nodeType <> nLink) and (connector.TargetNode.nodeType <> nLink) then
         if (connector.Edge.properties.getText = '') or options.RewriteOnFilling then
-          connector.Edge.properties.Description.Text := inttostr(Round(Distance(connector.SourceNode.Center.position, connector.TargetNode.Center.position)));
+          connector.Edge.properties.Description.Text := inttostr(Round(TMathLine.Distance(connector.SourceNode.Center.position, connector.TargetNode.Center.position)));
   end;
   Draw();
 end;
