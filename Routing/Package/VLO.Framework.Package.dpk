@@ -1,0 +1,84 @@
+package VLO.Framework.Package;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl;
+
+contains
+  vlo.lib.arrays in '..\Lib\vlo.lib.arrays.pas',
+  vlo.lib.cloner.contract in '..\Lib\vlo.lib.cloner.contract.pas',
+  vlo.lib.Connector in '..\Lib\vlo.lib.Connector.pas',
+  vlo.lib.Edge.Adapter in '..\Lib\vlo.lib.Edge.Adapter.pas',
+  vlo.lib.Edge in '..\Lib\vlo.lib.Edge.pas',
+  vlo.lib.font.serializer in '..\Lib\vlo.lib.font.serializer.pas',
+  vlo.lib.fonts in '..\Lib\vlo.lib.fonts.pas',
+  vlo.lib.GDI.Bitmaps in '..\Lib\vlo.lib.GDI.Bitmaps.pas',
+  vlo.lib.general.application in '..\Lib\vlo.lib.general.application.pas',
+  vlo.lib.grammar in '..\Lib\vlo.lib.grammar.pas',
+  vlo.lib.grammar.production in '..\Lib\vlo.lib.grammar.production.pas',
+  vlo.lib.Graph in '..\Lib\vlo.lib.Graph.pas',
+  vlo.lib.GUID.Generator in '..\Lib\vlo.lib.GUID.Generator.pas',
+  vlo.lib.intersection in '..\Lib\vlo.lib.intersection.pas',
+  vlo.lib.Layout in '..\Lib\vlo.lib.Layout.pas',
+  vlo.lib.logging in '..\Lib\vlo.lib.logging.pas',
+  vlo.lib.Math.Line in '..\Lib\vlo.lib.Math.Line.pas',
+  vlo.lib.Math in '..\Lib\vlo.lib.Math.pas',
+  vlo.lib.Math3D in '..\Lib\vlo.lib.Math3D.pas',
+  vlo.lib.MRU in '..\Lib\vlo.lib.MRU.pas',
+  vlo.lib.node.alignment in '..\Lib\vlo.lib.node.alignment.pas',
+  vlo.lib.Node.list in '..\Lib\vlo.lib.Node.list.pas',
+  vlo.lib.Node in '..\Lib\vlo.lib.Node.pas',
+  vlo.lib.options in '..\Lib\vlo.lib.options.pas',
+  vlo.lib.parser in '..\Lib\vlo.lib.parser.pas',
+  vlo.lib.path in '..\Lib\vlo.lib.path.pas',
+  vlo.lib.pattern.memento.caretaker in '..\Lib\vlo.lib.pattern.memento.caretaker.pas',
+  vlo.lib.pattern.memento.originator in '..\Lib\vlo.lib.pattern.memento.originator.pas',
+  vlo.lib.pattern.memento in '..\Lib\vlo.lib.pattern.memento.pas',
+  vlo.lib.properties.abstract in '..\Lib\vlo.lib.properties.abstract.pas',
+  vlo.lib.properties.Edge in '..\Lib\vlo.lib.properties.Edge.pas',
+  vlo.lib.properties.Node in '..\Lib\vlo.lib.properties.Node.pas',
+  vlo.lib.resources in '..\Lib\vlo.lib.resources.pas',
+  vlo.lib.RichEdit in '..\Lib\vlo.lib.RichEdit.pas',
+  vlo.lib.Routing.Dijkstra in '..\Lib\vlo.lib.Routing.Dijkstra.pas',
+  vlo.lib.routing in '..\Lib\vlo.lib.routing.pas',
+  vlo.lib.text in '..\Lib\vlo.lib.text.pas',
+  vlo.lib.treeLayout.helper in '..\Lib\vlo.lib.treeLayout.helper.pas',
+  vlo.lib.treeLayout in '..\Lib\vlo.lib.treeLayout.pas',
+  vlo.lib.treeLayout.ReingoldTilford in '..\Lib\vlo.lib.treeLayout.ReingoldTilford.pas',
+  vlo.lib.utils in '..\Lib\vlo.lib.utils.pas',
+  vlo.lib.vertex in '..\Lib\vlo.lib.vertex.pas',
+  vlo.lib.XML.Serializer in '..\Lib\vlo.lib.XML.Serializer.pas',
+  vlo.lib.zoom in '..\Lib\vlo.lib.zoom.pas',
+  GraphicsBuilder_TLB in '..\Lib\citect\GraphicsBuilder_TLB.pas',
+  vlo.lib.citect.dispatcher in '..\Lib\citect\vlo.lib.citect.dispatcher.pas',
+  vlo.lib.citect.element.contract in '..\Lib\citect\vlo.lib.citect.element.contract.pas',
+  vlo.lib.citect.element in '..\Lib\citect\vlo.lib.citect.element.pas',
+  vlo.lib.citect.PageImport in '..\Lib\citect\vlo.lib.citect.PageImport.pas',
+  vlo.lib.citect.painter.contract in '..\Lib\citect\vlo.lib.citect.painter.contract.pas',
+  vlo.lib.citect.painter in '..\Lib\citect\vlo.lib.citect.painter.pas',
+  vlo.lib.citect.properties in '..\Lib\citect\vlo.lib.citect.properties.pas';
+
+end.

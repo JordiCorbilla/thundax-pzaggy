@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/01/24 23:04:44.000.100,=rtl.dcp</Transaction>
+    <Transaction>2013/01/24 23:05:08.000.833,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.cloner.contract.pas</Transaction>
+    <Transaction>2013/01/24 23:05:08.000.874,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Connector.pas</Transaction>
+    <Transaction>2013/01/24 23:05:08.000.911,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Edge.Adapter.pas</Transaction>
+    <Transaction>2013/01/24 23:05:08.000.951,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Edge.pas</Transaction>
+    <Transaction>2013/01/24 23:05:08.000.678,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.arrays.pas</Transaction>
+    <Transaction>2013/01/24 23:05:08.000.983,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.font.serializer.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.352,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Layout.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.392,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.logging.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.894,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.pattern.memento.originator.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.850,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.pattern.memento.caretaker.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.511,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Math3D.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.991,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.properties.abstract.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.265,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.GUID.Generator.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.633,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Node.list.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.597,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.node.alignment.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.228,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Graph.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.474,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Math.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.556,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.MRU.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.675,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Node.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.309,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.intersection.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.436,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Math.Line.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.013,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.fonts.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.939,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.pattern.memento.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.120,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.grammar.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.763,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.parser.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.806,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.path.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.051,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.GDI.Bitmaps.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.717,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.options.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.085,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.general.application.pas</Transaction>
+    <Transaction>2013/01/24 23:05:09.000.161,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.grammar.production.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.159,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.RichEdit.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.434,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.treeLayout.ReingoldTilford.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.294,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.text.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.337,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.treeLayout.helper.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.382,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.treeLayout.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.251,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.routing.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.623,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.zoom.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.573,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.XML.Serializer.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.070,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.properties.Node.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.530,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.vertex.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.031,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.properties.Edge.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.114,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.resources.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.206,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.Routing.Dijkstra.pas</Transaction>
+    <Transaction>2013/01/24 23:05:10.000.479,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\vlo.lib.utils.pas</Transaction>
+    <Transaction>2013/01/24 23:06:42.000.563,C:\Users\jordi coll\Documents\RAD Studio\Projects\Package1.dproj=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Package\VLO.Framework.Package.dproj</Transaction>
+    <Transaction>2013/01/24 23:07:26.667,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\citect\GraphicsBuilder_TLB.pas</Transaction>
+    <Transaction>2013/01/24 23:07:26.745,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\citect\vlo.lib.citect.dispatcher.pas</Transaction>
+    <Transaction>2013/01/24 23:07:26.804,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\citect\vlo.lib.citect.element.contract.pas</Transaction>
+    <Transaction>2013/01/24 23:07:26.867,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\citect\vlo.lib.citect.element.pas</Transaction>
+    <Transaction>2013/01/24 23:07:26.924,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\citect\vlo.lib.citect.PageImport.pas</Transaction>
+    <Transaction>2013/01/24 23:07:26.977,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\citect\vlo.lib.citect.painter.contract.pas</Transaction>
+    <Transaction>2013/01/24 23:07:27.023,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\citect\vlo.lib.citect.painter.pas</Transaction>
+    <Transaction>2013/01/24 23:07:27.075,=C:\Desk\Google code\ThundaxPZaggy\thundax-pzaggy\Routing\Lib\citect\vlo.lib.citect.properties.pas</Transaction>
+  </Transactions>
+</BorlandProject>
