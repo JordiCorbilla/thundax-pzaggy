@@ -34,7 +34,7 @@ unit vlo.lib.pattern.memento.caretaker;
 interface
 
 uses
-  vlo.lib.Node, contnrs, uConnector, vlo.lib.Node.list, vlo.lib.pattern.memento;
+  vlo.lib.Node, contnrs, vlo.lib.Connector, vlo.lib.Node.list, vlo.lib.pattern.memento;
 
 type
   TCareTaker = class(TObject)

@@ -34,7 +34,7 @@ unit vlo.lib.path;
 interface
 
 uses
-  vlo.lib.Node, uConnector, vlo.lib.logging, Grids, vlo.lib.arrays, vlo.lib.routing, vlo.lib.Node.list;
+  vlo.lib.Node, vlo.lib.Connector, vlo.lib.logging, Grids, vlo.lib.arrays, vlo.lib.routing, vlo.lib.Node.list;
 
 type
   TPath = class(TObject)

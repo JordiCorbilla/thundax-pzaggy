@@ -34,7 +34,7 @@ unit vlo.lib.treeLayout;
 interface
 
 uses
-  uGraph, vlo.lib.Node, uConnector;
+  vlo.lib.Graph, vlo.lib.Node, vlo.lib.Connector;
 
 type
   TInfoNode = class(TObject)

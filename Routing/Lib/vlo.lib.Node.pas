@@ -34,9 +34,9 @@ unit vlo.lib.Node;
 interface
 
 uses
-  types, contnrs, Graphics, uEdges, Classes, vlo.lib.cloner.contract,
+  types, contnrs, Graphics, vlo.lib.Edge, Classes, vlo.lib.cloner.contract,
   vlo.lib.XML.Serializer, XMLDoc, XMLIntf, vlo.lib.vertex, vlo.lib.properties.Node,
-  uLayout, vlo.lib.options, vlo.lib.treeLayout.helper;
+  vlo.lib.Layout, vlo.lib.options, vlo.lib.treeLayout.helper;
 
 type
   // Vertex Position
