@@ -29,26 +29,34 @@
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *)
-unit vlo.lib.arrays;
+unit vlo.lib.RichEdit;
 
 interface
 
-type
-  TArrayInteger = array of integer;
+uses
+  RichEdit, Graphics, ComCtrls;
 
-  TArray = Class(TObject)
-    class procedure SetValue(var a: TArrayInteger; valor: integer);
-  End;
+type
+  TRichEditHelper = class(TObject)
+    class procedure SetWordBackGroundColor(RichEdit: TRichEdit; Index: Integer; Length : integer;  AColor: TColor);
+  end;
 
 implementation
 
-class procedure TArray.SetValue(var a: TArrayInteger; valor: integer);
+class procedure TRichEditHelper.SetWordBackGroundColor(RichEdit: TRichEdit; Index: Integer; Length : integer;  AColor: TColor);
 var
-  iPosArray: integer;
+  Format: CHARFORMAT2;
 begin
-  iPosArray := length(a);
-  SetLength(a, iPosArray + 1);
-  a[iPosArray] := valor;
+  FillChar(Format, SizeOf(Format), 0);
+  Format.cbSize := SizeOf(Format);
+  Format.dwMask := CFM_BACKCOLOR;
+  Format.crBackColor := AColor;
+  if Index <> -1 then
+  begin
+    RichEdit.SelStart := Index;
+    RichEdit.SelLength := Length;
+    RichEdit.Perform(EM_SETCHARFORMAT, SCF_SELECTION, Longint(@Format));
+  end;
 end;
 
 end.
