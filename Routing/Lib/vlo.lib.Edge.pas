@@ -819,13 +819,13 @@ end;
 function TAbstractEdge.PointOnLine(p: TPoint): boolean;
 begin
   if not FBendModified[0] and not FBendModified[1] and not FBendModified[2] then
-    Result := NearLine(p, FSource, FTarget)
+    Result := TMathLine.Near(p, FSource, FTarget)
   else
   begin
-    Result := NearLine(p, FSource, TZoom.ClientToGraph(FBendPoint[0]));
-    Result := Result or NearLine(p, TZoom.ClientToGraph(FBendPoint[0]), TZoom.ClientToGraph(FBendPoint[1]));
-    Result := Result or NearLine(p, TZoom.ClientToGraph(FBendPoint[1]), TZoom.ClientToGraph(FBendPoint[2]));
-    Result := Result or NearLine(p, TZoom.ClientToGraph(FBendPoint[2]), FTarget);
+    Result := TMathLine.Near(p, FSource, TZoom.ClientToGraph(FBendPoint[0]));
+    Result := Result or TMathLine.Near(p, TZoom.ClientToGraph(FBendPoint[0]), TZoom.ClientToGraph(FBendPoint[1]));
+    Result := Result or TMathLine.Near(p, TZoom.ClientToGraph(FBendPoint[1]), TZoom.ClientToGraph(FBendPoint[2]));
+    Result := Result or TMathLine.Near(p, TZoom.ClientToGraph(FBendPoint[2]), FTarget);
   end;
 end;
 
