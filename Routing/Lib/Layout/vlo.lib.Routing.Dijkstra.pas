@@ -34,19 +34,19 @@ unit vlo.lib.Routing.Dijkstra;
 interface
 
 uses
-  vlo.lib.Node, vlo.lib.Connector, vlo.lib.arrays, vlo.lib.properties.Node, vlo.lib.properties.Edge, vlo.lib.Node.list;
+  vlo.lib.Node, vlo.lib.Connector, vlo.lib.arrays, vlo.lib.properties.Abstract, vlo.lib.Node.list;
 
 type
   TDijkstra = Class(TObject)
   private
     nodeList: TNodeList;
     ConnectorList: TConnectorList;
-    EdgeProperties: TEdgeProperty;
-    NodeProperties: TNodeProperty;
+    EdgeProperties: TAbstractProperty;
+    NodeProperties: TAbstractProperty;
     function isValidDiagram(): boolean;
     procedure getFirstAndLastNode(var firstNode: integer; var lastNode: TArrayInteger);
   public
-    constructor Create(nodeList: TNodeList; ConnectorList: TConnectorList; NodeProperties: TNodeProperty; EdgeProperties: TEdgeProperty);
+    constructor Create(nodeList: TNodeList; ConnectorList: TConnectorList; NodeProperties: TAbstractProperty; EdgeProperties: TAbstractProperty);
     destructor Destroy(); override;
     procedure ApplyAlgorithm();
   End;
@@ -54,7 +54,7 @@ type
 implementation
 
 uses
-  Graphics, SysUtils, vlo.lib.utils, Dialogs;
+  Graphics, SysUtils, vlo.lib.utils, Dialogs, vlo.lib.properties.Node, vlo.lib.properties.Edge;
 
 const
   NoWeight = 999999;
@@ -178,7 +178,7 @@ begin
   end;
 end;
 
-constructor TDijkstra.Create(nodeList: TNodeList; ConnectorList: TConnectorList; NodeProperties: TNodeProperty; EdgeProperties: TEdgeProperty);
+constructor TDijkstra.Create(nodeList: TNodeList; ConnectorList: TConnectorList; NodeProperties: TAbstractProperty; EdgeProperties: TAbstractProperty);
 begin
   Self.nodeList := nodeList;
   Self.ConnectorList := ConnectorList;

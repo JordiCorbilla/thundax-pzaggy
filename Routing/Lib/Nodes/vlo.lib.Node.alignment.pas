@@ -47,6 +47,9 @@ type
 
 implementation
 
+uses
+  vlo.lib.properties.Node;
+
 class function TNodeHelper.AlignNodes(nodeList: TNodeList; alignment: TAlignment): boolean;
 var
   i: Integer;
@@ -133,7 +136,7 @@ begin
   begin
     if nodeList.items[i].Inside then
     begin
-      nodeList.items[i].properties.zOrder := nodeList.items[i].properties.zOrder + pos;
+      TNodeProperty(nodeList.items[i].properties).zOrder := TNodeProperty(nodeList.items[i].properties).zOrder + pos;
       ordered := true;
     end;
   end;

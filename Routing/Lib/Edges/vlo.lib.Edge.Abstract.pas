@@ -29,62 +29,29 @@
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *)
-unit vlo.lib.Edge;
+unit vlo.lib.Edge.Abstract;
 
 interface
 
 uses
-  types, Graphics, Classes, vlo.lib.XML.Serializer, XMLDoc, XMLIntf, vlo.lib.properties.Edge;
+  vlo.lib.Edge, types, Graphics, Classes, vlo.lib.XML.Serializer, XMLDoc, XMLIntf,
+  vlo.lib.properties.Abstract;
 
 type
-  TPointEx = packed record
-    X: Extended;
-    Y: Extended;
-  end;
-
-  TTypeEdge = (SimpleEdge, SimpleArrowEdge, SimpleDoubleArrowEdge, SimpleDoubleLinkedArrowEdge, DottedEdge, DottedArrowEdge, DottedDoubleArrowEdge, DottedDoubleLinkedArrowEdge, noEdge);
-  TArrowKind = (Normal, Fashion);
-
-  IArrow = interface(IInterface)
-    ['{5A1664E5-C09F-45E4-B90E-19EE1625AFF3}']
-    procedure DrawArrow(Source, Target: TPoint);
-    procedure DrawFashionArrow(Source, Target: TPoint);
-  end;
-
-  IEdge = interface(IInterface)
-    ['{B18EAAFF-30DA-4556-91A7-FC15720997E5}']
-    procedure DrawEdge(Source, Target: TPoint; SourceI, TargetI: TPoint);
-  end;
-
-  IDottedEdge = interface(IInterface)
-    ['{F989821E-10F1-4A25-AB3F-D4F3720D9409}']
-    procedure DrawDottedEdge(Source, Target: TPoint; SourceI, TargetI: TPoint);
-  end;
-
-  TDrawable = class(TInterfacedObject, IArrow, IEdge, IDottedEdge, ISerializable)
-    procedure DrawArrow(Source, Target: TPoint); virtual; abstract;
-    procedure DrawFashionArrow(Source, Target: TPoint); virtual; abstract;
-    procedure DrawEdge(Source, Target: TPoint; SourceI, TargetI: TPoint); virtual; abstract;
-    procedure DrawDottedEdge(Source, Target: TPoint; SourceI, TargetI: TPoint); virtual; abstract;
-    function MarshalToXML(XMLDoc: IXMLDocument; iXMLRootNode: IXMLNode; sNode: string): IXMLNode; virtual; abstract;
-    function UnMarshalFromXML(XMLDoc: IXMLDocument; iXMLRootNode: IXMLNode; sNode: string): IXMLNode; virtual; abstract;
-  end;
-
   // F[0]....F[1]....F[2] (Construcció de la línia)
-
   TAbstractEdge = class(TDrawable)
   private
     FArrowKind: TArrowKind;
     FAttachedObject: Pointer;
     Fid: string;
-    FProperties: TEdgeProperty;
+    FProperties: TAbstractProperty;
     FInside: boolean;
     procedure SetArrowKind(const Value: TArrowKind);
     procedure SetInside(const Value: boolean);
     function Distance(p1, p2: TPoint): double;
     procedure SetAttachedObject(const Value: Pointer);
     procedure Setid(const Value: string);
-    procedure SetProperties(const Value: TEdgeProperty);
+    procedure SetProperties(const Value: TAbstractProperty);
     procedure GetPointsToDrawText(Source, Target: TPoint; var First, Last: TPoint);
   public
     FSource: TPoint;
@@ -95,7 +62,7 @@ type
     FBendPoint: Array [0 .. 2] of TPoint;
     FBendModified: Array [0 .. 2] of boolean;
     property Inside: boolean read FInside write SetInside;
-    property properties: TEdgeProperty read FProperties write SetProperties;
+    property properties: TAbstractProperty read FProperties write SetProperties;
     property id: string read Fid write Setid;
     property ArrowKind: TArrowKind read FArrowKind write SetArrowKind;
     property AttachedObject: Pointer read FAttachedObject write SetAttachedObject;
@@ -122,188 +89,21 @@ type
     procedure Move(X, Y: integer); overload;
   end;
 
-  TAbstractSimpleEdge = class(TAbstractEdge)
-    procedure Draw(Source, Target: TPoint; SourceI, TargetI: TPoint); override;
+type
+  TAdaptedEdge = class(TObject)
+    FObject: TAbstractEdge;
+    procedure getProperties(const Abstract1: TAbstractEdge; var Abstract2: TAbstractEdge);
+    constructor Create(kind: TTypeEdge; obj: TAbstractEdge);
   end;
-
-  TAbstractSimpleArrowEdge = class(TAbstractEdge)
-    procedure Draw(Source, Target: TPoint; SourceI, TargetI: TPoint); override;
-  end;
-
-  TAbstractSimpleDoubleArrowEdge = class(TAbstractEdge)
-    procedure Draw(Source, Target: TPoint; SourceI, TargetI: TPoint); override;
-  end;
-
-  TAbstractSimpleDoubleLinkedArrowEdge = class(TAbstractEdge)
-    procedure Draw(Source, Target: TPoint; SourceI, TargetI: TPoint); override;
-  end;
-
-  TAbstractDottedEdge = class(TAbstractEdge)
-    procedure Draw(Source, Target: TPoint; SourceI, TargetI: TPoint); override;
-  end;
-
-  TAbstractDottedArrowEdge = class(TAbstractEdge)
-    procedure Draw(Source, Target: TPoint; SourceI, TargetI: TPoint); override;
-  end;
-
-  TAbstractDottedDoubleArrowEdge = class(TAbstractEdge)
-    procedure Draw(Source, Target: TPoint; SourceI, TargetI: TPoint); override;
-  end;
-
-  TAbstractDottedDoubleLinkedArrowEdge = class(TAbstractEdge)
-    procedure Draw(Source, Target: TPoint; SourceI, TargetI: TPoint); override;
-  end;
-
-  TAbstractFactory = class(TObject)
-  private
-    FCanvas: TCanvas;
-  public
-    constructor Create(Canvas: TCanvas);
-    destructor Destroy; override;
-    function GetEdge(): TAbstractEdge; virtual; abstract;
-    function GetEdgeArrow(): TAbstractEdge; virtual; abstract;
-    function GetEdgeDoubleArrow(): TAbstractEdge; virtual; abstract;
-    function GetEdgeLinkedArrow(): TAbstractEdge; virtual; abstract;
-    function GetEdgeByName(name: string): TAbstractEdge; virtual; abstract;
-  end;
-
-  TSimpleEdgesFactory = class(TAbstractFactory)
-  public
-    constructor Create(Canvas: TCanvas);
-    destructor Destroy; override;
-    function GetEdge(): TAbstractEdge; override;
-    function GetEdgeArrow(): TAbstractEdge; override;
-    function GetEdgeDoubleArrow(): TAbstractEdge; override;
-    function GetEdgeLinkedArrow(): TAbstractEdge; override;
-    function GetEdgeByName(name: string): TAbstractEdge; override;
-  end;
-
-  TDottedEdgesFactory = class(TAbstractFactory)
-  public
-    constructor Create(Canvas: TCanvas);
-    destructor Destroy; override;
-    function GetEdge(): TAbstractEdge; override;
-    function GetEdgeArrow(): TAbstractEdge; override;
-    function GetEdgeDoubleArrow(): TAbstractEdge; override;
-    function GetEdgeLinkedArrow(): TAbstractEdge; override;
-    function GetEdgeByName(name: string): TAbstractEdge; override;
-  end;
-
-function PointEx(X, Y: Extended): TPointEx;
-
-var
-  kleefPenStyle: array [1 .. 2] of DWORD = (
-    10,
-    10
-  );
 
 implementation
 
 uses
-  Windows, Math, SysUtils, vlo.lib.Math.Line, vlo.lib.GUID.Generator, StrUtils, vlo.lib.Math, vlo.lib.zoom;
+  Windows, Math, SysUtils, vlo.lib.Math.Line, vlo.lib.GUID.Generator, StrUtils,
+  vlo.lib.Math, vlo.lib.zoom, vlo.lib.Edge.Simple, vlo.lib.Edge.Dotted, vlo.lib.Edge.Factory,
+  vlo.lib.properties.Edge, vlo.lib.Edge.Points;
 
-function PointEx(X, Y: Extended): TPointEx;
-begin
-  Result.X := X;
-  Result.Y := Y;
-end;
-
-{ TSimpleEdgesFactory }
-
-constructor TSimpleEdgesFactory.Create(Canvas: TCanvas);
-begin
-  inherited;
-end;
-
-destructor TSimpleEdgesFactory.Destroy;
-begin
-  inherited;
-end;
-
-function TSimpleEdgesFactory.GetEdge(): TAbstractEdge;
-begin
-  Result := TAbstractSimpleEdge.Create(FCanvas);
-end;
-
-function TSimpleEdgesFactory.GetEdgeArrow(): TAbstractEdge;
-begin
-  Result := TAbstractSimpleArrowEdge.Create(FCanvas);
-end;
-
-function TSimpleEdgesFactory.GetEdgeByName(name: string): TAbstractEdge;
-begin
-  Result := nil;
-  if (name = 'TAbstractSimpleEdge') or (name = 'TAbstractSimpleLine') then
-    Result := GetEdge();
-  if (name = 'TAbstractSimpleArrowEdge') or (name = 'TAbstractSimpleArrowLine') then
-    Result := GetEdgeArrow();
-  if (name = 'TAbstractSimpleDoubleArrowEdge') or (name = 'TAbstractSimpleDoubleArrowLine') then
-    Result := GetEdgeDoubleArrow();
-  if (name = 'TAbstractSimpleDoubleLinkedArrowEdge') or (name = 'TAbstractSimpleDoubleLinkedArrowLine') then
-    Result := GetEdgeLinkedArrow();
-end;
-
-function TSimpleEdgesFactory.GetEdgeDoubleArrow(): TAbstractEdge;
-begin
-  Result := TAbstractSimpleDoubleArrowEdge.Create(FCanvas);
-end;
-
-function TSimpleEdgesFactory.GetEdgeLinkedArrow: TAbstractEdge;
-begin
-  Result := TAbstractSimpleDoubleLinkedArrowEdge.Create(FCanvas);
-  Result.properties.FillColor := clBlue;
-  Result.properties.Filled := true;
-end;
-
-{ TAbstractFactory }
-
-constructor TAbstractFactory.Create(Canvas: TCanvas);
-begin
-  FCanvas := Canvas;
-end;
-
-destructor TAbstractFactory.Destroy;
-begin
-  inherited;
-end;
-
-{ TAbstractSimpleArrowLine }
-
-procedure TAbstractSimpleArrowEdge.Draw(Source, Target: TPoint; SourceI, TargetI: TPoint);
-begin
-  FSource := Point(Source.X, Source.Y);
-  FTarget := Point(Target.X, Target.Y);
-  FSourceInterSection := SourceI;
-  FTargetInterSection := TargetI;
-  DrawEdge(Source, Target, SourceI, TargetI);
-  case FArrowKind of
-    Normal:
-      DrawArrow(GetLastModified(), TargetI);
-    Fashion:
-      DrawFashionArrow(GetLastModified(), TargetI);
-  end;
-  DrawText(Source, Target);
-end;
-
-{ TAbstractDottedArrowLine }
-
-procedure TAbstractDottedArrowEdge.Draw(Source, Target: TPoint; SourceI, TargetI: TPoint);
-begin
-  FSource := Point(Source.X, Source.Y);
-  FTarget := Point(Target.X, Target.Y);
-  FSourceInterSection := SourceI;
-  FTargetInterSection := TargetI;
-  DrawDottedEdge(Source, Target, SourceI, TargetI);
-  case FArrowKind of
-    Normal:
-      DrawArrow(GetLastModified, TargetI);
-    Fashion:
-      DrawFashionArrow(GetLastModified, TargetI);
-  end;
-  DrawText(Source, Target);
-end;
-
-{ TAbstractLine }
+{ TAbstractEdge }
 
 function TAbstractEdge.CalcAngleTwoPoints(Source, Target: TPoint): double;
 var
@@ -425,7 +225,7 @@ begin
   if LongitudVector <> 0 then
     DifUnitariaLinea := PointEx(DifLinea.X / LongitudVector, DifLinea.Y / LongitudVector);
 
-  lenArrow := Muldiv(FProperties.lenArrow, 100, globalZoom);
+  lenArrow := Muldiv(TEdgeProperty(FProperties).lenArrow, 100, globalZoom);
   // BaseTriangulo donde la flecha es perpendicular a la base del triangulo
   BaseTriangulo := Point(Target.X - round(lenArrow * DifUnitariaLinea.X), Target.Y - round(lenArrow * DifUnitariaLinea.Y));
 
@@ -571,11 +371,11 @@ begin
   if (Distance(Source, Target) < 2.0) or (Distance(Source, Target) > 2000.0) then
     exit;
   angle := ArcTan2((Target.Y - Source.Y), (Target.X - Source.X));
-  lenArrow := Muldiv(FProperties.lenArrow, 100, globalZoom);
+  lenArrow := Muldiv(TEdgeProperty(FProperties).lenArrow, 100, globalZoom);
   PArrow[1] := Target;
-  PArrow[2] := CalcPoint(Target, angle + degToRad(FProperties.InclinationAngle), lenArrow);
+  PArrow[2] := CalcPoint(Target, angle + degToRad(TEdgeProperty(FProperties).InclinationAngle), lenArrow);
   PArrow[3] := CalcPoint(Target, angle, 2 * lenArrow div 3);
-  PArrow[4] := CalcPoint(Target, angle - degToRad(FProperties.InclinationAngle), lenArrow); // pi/9
+  PArrow[4] := CalcPoint(Target, angle - degToRad(TEdgeProperty(FProperties).InclinationAngle), lenArrow); // pi/9
 
   FCanvas.Pen.Width := FProperties.penWidth;
   if FInside then
@@ -849,7 +649,7 @@ begin
   FInside := Value;
 end;
 
-procedure TAbstractEdge.SetProperties(const Value: TEdgeProperty);
+procedure TAbstractEdge.SetProperties(const Value: TAbstractProperty);
 begin
   FProperties := Value;
 end;
@@ -967,178 +767,53 @@ begin
   end;
 end;
 
-{ TAbstractSimpleLine }
+{ TAdaptedLine }
 
-procedure TAbstractSimpleEdge.Draw(Source, Target: TPoint; SourceI, TargetI: TPoint);
+constructor TAdaptedEdge.Create(kind: TTypeEdge; obj: TAbstractEdge);
+var
+  simple: TSimpleEdgesFactory;
+  dotted: TDottedEdgesFactory;
 begin
-  FSource := Point(Source.X, Source.Y);
-  FTarget := Point(Target.X, Target.Y);
-  FSourceInterSection := SourceI;
-  FTargetInterSection := TargetI;
-  DrawEdge(Source, Target, SourceI, TargetI);
-  DrawText(Source, Target);
-end;
-
-{ TAbstractSimpleDoubleArrowLine }
-
-procedure TAbstractSimpleDoubleArrowEdge.Draw(Source, Target: TPoint; SourceI, TargetI: TPoint);
-begin
-  FSource := Point(Source.X, Source.Y);
-  FTarget := Point(Target.X, Target.Y);
-  FSourceInterSection := SourceI;
-  FTargetInterSection := TargetI;
-  DrawEdge(Source, Target, SourceI, TargetI);
-
-  case FArrowKind of
-    Normal:
-      begin
-        DrawArrow(GetLastModified(), TargetI);
-        DrawArrow(GetFirstModified(), SourceI);
-      end;
-    Fashion:
-      begin
-        DrawFashionArrow(GetLastModified(), TargetI);
-        DrawFashionArrow(GetFirstModified(), SourceI);
-      end;
+  simple := TSimpleEdgesFactory.Create(obj.FCanvas);
+  dotted := TDottedEdgesFactory.Create(obj.FCanvas);
+  case kind of
+    SimpleEdge:
+      FObject := simple.GetEdge;
+    SimpleArrowEdge:
+      FObject := simple.GetEdgeArrow;
+    SimpleDoubleArrowEdge:
+      FObject := simple.GetEdgeDoubleArrow;
+    SimpleDoubleLinkedArrowEdge:
+      FObject := simple.GetEdgeLinkedArrow;
+    DottedEdge:
+      FObject := dotted.GetEdge;
+    DottedArrowEdge:
+      FObject := dotted.GetEdgeArrow;
+    DottedDoubleArrowEdge:
+      FObject := dotted.GetEdgeDoubleArrow;
+    DottedDoubleLinkedArrowEdge:
+      FObject := dotted.GetEdgeLinkedArrow;
+    noEdge:
+      FObject := nil;
   end;
-  DrawText(Source, Target);
+  getProperties(obj, FObject);
+  FreeAndNil(simple);
+  FreeAndNil(dotted);
 end;
 
-{ TAbstractDottedDoubleArrowLine }
-
-procedure TAbstractDottedDoubleArrowEdge.Draw(Source, Target: TPoint; SourceI, TargetI: TPoint);
+procedure TAdaptedEdge.getProperties(const Abstract1: TAbstractEdge; var Abstract2: TAbstractEdge);
 begin
-  FSource := Point(Source.X, Source.Y);
-  FTarget := Point(Target.X, Target.Y);
-  FSourceInterSection := SourceI;
-  FTargetInterSection := TargetI;
-  DrawDottedEdge(Source, Target, SourceI, TargetI);
-
-  case FArrowKind of
-    Normal:
-      begin
-        DrawArrow(GetLastModified, TargetI);
-        DrawArrow(GetFirstModified, SourceI);
-      end;
-    Fashion:
-      begin
-        DrawFashionArrow(GetLastModified, TargetI);
-        DrawFashionArrow(GetFirstModified, SourceI);
-      end;
-  end;
-  DrawText(Source, Target);
-end;
-
-{ TAbstractDottedLine }
-
-procedure TAbstractDottedEdge.Draw(Source, Target: TPoint; SourceI, TargetI: TPoint);
-begin
-  FSource := Point(Source.X, Source.Y);
-  FTarget := Point(Target.X, Target.Y);
-  FSourceInterSection := SourceI;
-  FTargetInterSection := TargetI;
-  DrawDottedEdge(Source, Target, SourceI, TargetI);
-  DrawText(Source, Target);
-end;
-
-{ TDottedLinesFactory }
-
-constructor TDottedEdgesFactory.Create(Canvas: TCanvas);
-begin
-  inherited;
-end;
-
-destructor TDottedEdgesFactory.Destroy;
-begin
-
-  inherited;
-end;
-
-function TDottedEdgesFactory.GetEdge: TAbstractEdge;
-begin
-  Result := TAbstractDottedEdge.Create(FCanvas);
-end;
-
-function TDottedEdgesFactory.GetEdgeArrow: TAbstractEdge;
-begin
-  Result := TAbstractDottedArrowEdge.Create(FCanvas);
-end;
-
-function TDottedEdgesFactory.GetEdgeByName(name: string): TAbstractEdge;
-begin
-  Result := nil;
-  if (name = 'TAbstractDottedEdge') or (name = 'TAbstractDottedLine') then
-    Result := GetEdge();
-  if (name = 'TAbstractDottedArrowEdge') or (name = 'TAbstractDottedArrowLine') then
-    Result := GetEdgeArrow();
-  if (name = 'TAbstractDottedDoubleArrowEdge') or (name = 'TAbstractDottedDoubleArrowLine') then
-    Result := GetEdgeDoubleArrow();
-  if (name = 'TAbstractDottedDoubleLinkedArrowEdge') or (name = 'TAbstractDottedDoubleLinkedArrowLine') then
-    Result := GetEdgeLinkedArrow();
-end;
-
-function TDottedEdgesFactory.GetEdgeDoubleArrow: TAbstractEdge;
-begin
-  Result := TAbstractDottedDoubleArrowEdge.Create(FCanvas);
-end;
-
-function TDottedEdgesFactory.GetEdgeLinkedArrow: TAbstractEdge;
-begin
-  Result := TAbstractDottedDoubleLinkedArrowEdge.Create(FCanvas);
-  Result.properties.FillColor := clBlue;
-  Result.properties.Filled := true;
-end;
-
-{ TAbstractSimpleDoubleLinkedArrowLine }
-
-procedure TAbstractSimpleDoubleLinkedArrowEdge.Draw(Source, Target, SourceI, TargetI: TPoint);
-begin
-  FSource := Point(Source.X, Source.Y);
-  FTarget := Point(Target.X, Target.Y);
-  FSourceInterSection := SourceI;
-  FTargetInterSection := TargetI;
-  DrawEdge(Source, Target, SourceI, TargetI);
-
-  case FArrowKind of
-    Normal:
-      begin
-        DrawArrow(GetLastModified(), TargetI);
-        DrawArrow(GetFirstModified(), SourceI);
-      end;
-    Fashion:
-      begin
-        DrawFashionArrow(GetLastModified(), TargetI);
-        DrawFashionArrow(GetFirstModified(), SourceI);
-      end;
-  end;
-  DrawImageLink(Source, Target);
-  DrawTextOrientation(Source, Target);
-end;
-
-{ TAbstractDottedDoubleLinkedArrowLine }
-
-procedure TAbstractDottedDoubleLinkedArrowEdge.Draw(Source, Target, SourceI, TargetI: TPoint);
-begin
-  FSource := Point(Source.X, Source.Y);
-  FTarget := Point(Target.X, Target.Y);
-  FSourceInterSection := SourceI;
-  FTargetInterSection := TargetI;
-  DrawDottedEdge(Source, Target, SourceI, TargetI);
-
-  case FArrowKind of
-    Normal:
-      begin
-        DrawArrow(GetLastModified, TargetI);
-        DrawArrow(GetFirstModified, SourceI);
-      end;
-    Fashion:
-      begin
-        DrawFashionArrow(GetLastModified, TargetI);
-        DrawFashionArrow(GetFirstModified, SourceI);
-      end;
-  end;
-  DrawImageLink(Source, Target);
-  DrawTextOrientation(Source, Target);
+  Abstract2.FSource := Abstract1.FSource;
+  Abstract2.FTarget := Abstract1.FTarget;
+  Abstract2.FBendPoint[0] := Abstract1.FBendPoint[0];
+  Abstract2.FBendPoint[1] := Abstract1.FBendPoint[1];
+  Abstract2.FBendPoint[2] := Abstract1.FBendPoint[2];
+  Abstract2.FBendModified[0] := Abstract1.FBendModified[0];
+  Abstract2.FBendModified[1] := Abstract1.FBendModified[1];
+  Abstract2.FBendModified[2] := Abstract1.FBendModified[2];
+  Abstract2.Properties.Assign(Abstract1.Properties);
+  Abstract2.ArrowKind := Abstract1.ArrowKind;
+  Abstract2.Inside := Abstract1.Inside;
 end;
 
 end.

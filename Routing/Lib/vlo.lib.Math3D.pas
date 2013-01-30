@@ -81,9 +81,9 @@ procedure T3DMesh.CalcPoints();
 
 function d3Dto2D (panx, pany, panz, centrex, centrey : Double; position : T3DPoint) : T2DPoint;
 var
-  x, y, z : Double;
-  newx, newy, newz : double;
-  screenx, screeny : double;
+//  x, y, z : Double;
+//  newx, newy, newz : double;
+//  screenx, screeny : double;
   d2d : T2DPoint;
 begin
 //TODO

@@ -35,8 +35,8 @@ interface
 
 uses
   types, contnrs, Graphics, vlo.lib.Edge, Classes, vlo.lib.cloner.contract,
-  vlo.lib.XML.Serializer, XMLDoc, XMLIntf, vlo.lib.vertex, vlo.lib.properties.Node,
-  vlo.lib.Layout, vlo.lib.options, vlo.lib.treeLayout.helper;
+  vlo.lib.XML.Serializer, XMLDoc, XMLIntf, vlo.lib.vertex, vlo.lib.properties.Abstract,
+  vlo.lib.Layout, vlo.lib.treeLayout.helper, vlo.lib.options;
 
 type
   // Vertex Position
@@ -55,7 +55,7 @@ type
     FDrawing: Boolean;
     FAttachedObject: Pointer;
     FId: string;
-    FProperties: TNodeProperty;
+    FProperties: TAbstractProperty;
     FImage: string;
     FHookeForce: TForce;
     FSpeed: TForce;
@@ -73,7 +73,7 @@ type
     procedure SetVertex(Index: integer; Value: TPoint);
     procedure SetAttachedObject(const Value: Pointer);
     procedure SetId(const Value: string);
-    procedure SetProperties(const Value: TNodeProperty);
+    procedure SetProperties(const Value: TAbstractProperty);
     procedure SetImage(const Value: string);
     procedure SetCoulombForce(const Value: TForce);
     procedure SetHookeForce(const Value: TForce);
@@ -90,7 +90,7 @@ type
     property Neighbour: TStringList read FNeighbour write SetNeighbour;
     property id: string read FId write SetId;
     property Image: string read FImage write SetImage;
-    property Properties: TNodeProperty read FProperties write SetProperties;
+    property Properties: TAbstractProperty read FProperties write SetProperties;
     property Vertex1: TPoint index 1 read GetVertex write SetVertex;
     property Vertex2: TPoint index 2 read GetVertex write SetVertex;
     property Vertex3: TPoint index 3 read GetVertex write SetVertex;
@@ -132,7 +132,7 @@ function Compare(Item1, Item2: Pointer): integer;
 implementation
 
 uses
-  SysUtils, vlo.lib.text, vlo.lib.GUID.Generator, StrUtils, Windows, vlo.lib.zoom;
+  SysUtils, vlo.lib.text, vlo.lib.GUID.Generator, StrUtils, Windows, vlo.lib.zoom, vlo.lib.properties.Node;
 
 { TNode }
 
@@ -289,9 +289,9 @@ begin
   if FImage <> '' then
   begin
     canvas.Brush.Style := bsSolid;
-    canvas.Brush.Color := Properties.ColorNodeifImage;
+    canvas.Brush.Color := TNodeProperty(Properties).ColorNodeifImage;
     canvas.Pen.Width := Properties.penWidth;
-    canvas.Brush.Color := Properties.ColorNodeifImage;
+    canvas.Brush.Color := TNodeProperty(Properties).ColorNodeifImage;
   end
   else
   begin
@@ -308,7 +308,7 @@ begin
   else
   begin
     if FImage <> '' then
-      canvas.Pen.Color := Properties.ColorBorderIfImage
+      canvas.Pen.Color := TNodeProperty(Properties).ColorBorderIfImage
     else
       canvas.Pen.Color := Properties.linecolor;
   end;
@@ -349,7 +349,7 @@ begin
     for i := 0 to Properties.description.Count - 1 do
     begin
       p := Point(TZoom.ClientToGraph(Vertex1).x + 2, TZoom.ClientToGraph(Vertex1).y + 1 + (i * FontSize));
-      TGDIText.DrawTextOrientation(canvas, p, 0, Properties.FontText, Properties.description[i], FImage <> '', Properties.ColorFontifImage, true);
+      TGDIText.DrawTextOrientation(canvas, p, 0, Properties.FontText, Properties.description[i], FImage <> '', TNodeProperty(Properties).ColorFontifImage, true);
     end;
   end;
 end;
@@ -570,7 +570,7 @@ begin
   FPrivateNode := Value;
 end;
 
-procedure TNode.SetProperties(const Value: TNodeProperty);
+procedure TNode.SetProperties(const Value: TAbstractProperty);
 begin
   FProperties := Value;
 end;
@@ -649,9 +649,9 @@ end;
 
 function Compare(Item1, Item2: Pointer): integer;
 begin
-  if (TNode(Item1).Properties.zOrder > TNode(Item2).Properties.zOrder) then
+  if (TNodeProperty(TNode(Item1).Properties).zOrder > TNodeProperty(TNode(Item2).Properties).zOrder) then
     result := 1
-  else if (TNode(Item1).Properties.zOrder = TNode(Item2).Properties.zOrder) then
+  else if (TNodeProperty(TNode(Item1).Properties).zOrder = TNodeProperty(TNode(Item2).Properties).zOrder) then
     result := 0
   else
     result := -1

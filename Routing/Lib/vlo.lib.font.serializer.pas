@@ -34,13 +34,13 @@ unit vlo.lib.font.serializer;
 interface
 
 uses
-  vlo.lib.properties.Node, vlo.lib.properties.Edge, inifiles, Graphics;
+  vlo.lib.properties.Abstract, inifiles, Graphics;
 
 type
   TFontParser = class(TObject)
     class procedure Serializer(ini: TIniFile; section: String; objFont: TFont); overload;
-    class procedure Deserializer(ini: TIniFile; section: String; var objFont: TNodeProperty); overload;
-    class procedure Deserializer(ini: TIniFile; section: String; var objFont: TEdgeProperty); overload;
+    class procedure Deserializer(ini: TIniFile; section: String; var objFont: TAbstractProperty); overload;
+    //class procedure Deserializer(ini: TIniFile; section: String; var objFont: TEdgeProperty); overload;
   end;
 
 const
@@ -73,7 +73,7 @@ begin
   end;
 end;
 
-class procedure TFontParser.Deserializer(ini: TIniFile; section: String; var objFont: TNodeProperty);
+class procedure TFontParser.Deserializer(ini: TIniFile; section: String; var objFont: TAbstractProperty);
 begin
   if Assigned(ini) and Assigned(objFont) then
   begin
@@ -94,25 +94,25 @@ begin
   end;
 end;
 
-class procedure TFontParser.Deserializer(ini: TIniFile; section: String; var objFont: TEdgeProperty);
-begin
-  if Assigned(ini) and Assigned(objFont) then
-  begin
-    objFont.FontText.Name := ini.ReadString(section, Fdesc + 'Name', 'Calibri');
-    objFont.FontText.Size := StrToInt(ini.ReadString(section, Fdesc + 'Size', '12'));
-    objFont.FontText.Color := StrToInt(ini.ReadString(section, Fdesc + 'Color', '0'));
-    if StrToInt(ini.ReadString(section, Fdesc + 'fsBold', '0')) = FW_BOLD then
-      objFont.FontText.Style := objFont.FontText.Style + [fsBold];
-
-    if StrToInt(ini.ReadString(section, Fdesc + 'fsItalic', '0')) = 1 then
-      objFont.FontText.Style := objFont.FontText.Style + [fsItalic];
-
-    if StrToInt(ini.ReadString(section, Fdesc + 'fsUnderline', '0')) = 1 then
-      objFont.FontText.Style := objFont.FontText.Style + [fsUnderline];
-
-    if StrToInt(ini.ReadString(section, Fdesc + 'fsStrikeOut', '0')) = 1 then
-      objFont.FontText.Style := objFont.FontText.Style + [fsStrikeOut];
-  end;
-end;
+//class procedure TFontParser.Deserializer(ini: TIniFile; section: String; var objFont: TAbstractProperty);
+//begin
+//  if Assigned(ini) and Assigned(objFont) then
+//  begin
+//    objFont.FontText.Name := ini.ReadString(section, Fdesc + 'Name', 'Calibri');
+//    objFont.FontText.Size := StrToInt(ini.ReadString(section, Fdesc + 'Size', '12'));
+//    objFont.FontText.Color := StrToInt(ini.ReadString(section, Fdesc + 'Color', '0'));
+//    if StrToInt(ini.ReadString(section, Fdesc + 'fsBold', '0')) = FW_BOLD then
+//      objFont.FontText.Style := objFont.FontText.Style + [fsBold];
+//
+//    if StrToInt(ini.ReadString(section, Fdesc + 'fsItalic', '0')) = 1 then
+//      objFont.FontText.Style := objFont.FontText.Style + [fsItalic];
+//
+//    if StrToInt(ini.ReadString(section, Fdesc + 'fsUnderline', '0')) = 1 then
+//      objFont.FontText.Style := objFont.FontText.Style + [fsUnderline];
+//
+//    if StrToInt(ini.ReadString(section, Fdesc + 'fsStrikeOut', '0')) = 1 then
+//      objFont.FontText.Style := objFont.FontText.Style + [fsStrikeOut];
+//  end;
+//end;
 
 end.
