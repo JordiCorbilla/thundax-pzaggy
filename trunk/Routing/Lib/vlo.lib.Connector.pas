@@ -35,7 +35,7 @@ interface
 
 uses
   vlo.lib.Node, vlo.lib.XML.Serializer, vlo.lib.Edge, XMLDoc, XMLIntf, Graphics, Classes,
-  contnrs, vlo.lib.cloner.contract, Generics.Collections, vlo.lib.Node.list;
+  contnrs, vlo.lib.cloner.contract, Generics.Collections, vlo.lib.Node.list, vlo.lib.Edge.Abstract;
 
 type
   TConnector = class(TInterfacedObject, ISerializable, ICloneable)
@@ -80,7 +80,7 @@ type
 implementation
 
 uses
-  SysUtils;
+  SysUtils, vlo.lib.Edge.Factory;
 
 { TConnector }
 

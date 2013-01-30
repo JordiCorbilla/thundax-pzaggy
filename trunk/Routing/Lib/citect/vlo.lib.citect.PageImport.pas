@@ -34,7 +34,7 @@ unit vlo.lib.citect.PageImport;
 interface
 
 uses
-  vlo.lib.Node, vlo.lib.logging, vlo.lib.Node.list;
+  vlo.lib.logging, vlo.lib.Node.list;
 
 type
   TCitectPageImport = class(TObject)
@@ -50,7 +50,7 @@ type
 implementation
 
 uses
-  GraphicsBuilder_TLB, SysUtils, ComObj, Classes, Graphics;
+  GraphicsBuilder_TLB, SysUtils, ComObj, Classes, Graphics, vlo.lib.Node;
 
 { TCitectPageImport }
 

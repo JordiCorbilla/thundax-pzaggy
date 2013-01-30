@@ -35,7 +35,7 @@ interface
 
 uses
   types, contnrs, Graphics, vlo.lib.Edge, Classes, vlo.lib.cloner.contract,
-  vlo.lib.XML.Serializer, XMLDoc, XMLIntf, vlo.lib.vertex, vlo.lib.properties.Node,
+  vlo.lib.XML.Serializer, XMLDoc, XMLIntf, vlo.lib.vertex,
   vlo.lib.Layout, vlo.lib.options, vlo.lib.treeLayout.helper, vlo.lib.Node;
 
 type

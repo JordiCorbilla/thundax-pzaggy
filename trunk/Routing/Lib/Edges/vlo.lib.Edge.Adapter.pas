@@ -34,52 +34,11 @@ unit vlo.lib.Edge.Adapter;
 interface
 
 uses
-  vlo.lib.Edge, Graphics, Classes, SysUtils;
-
-type
-  TAdaptedEdge = class(TObject)
-    FObject: TAbstractEdge;
-    procedure getProperties(const Abstract1: TAbstractEdge; var Abstract2: TAbstractEdge);
-    constructor Create(kind: TTypeEdge; obj: TAbstractEdge);
-  end;
+  vlo.lib.Edge, Graphics, Classes, SysUtils, vlo.lib.Edge.Abstract;
 
 function getAdaptedLine(kind: TTypeEdge; obj: TAbstractEdge): TAbstractEdge;
 
 implementation
-
-{ TAdaptedLine }
-
-constructor TAdaptedEdge.Create(kind: TTypeEdge; obj: TAbstractEdge);
-var
-  simple: TSimpleEdgesFactory;
-  dotted: TDottedEdgesFactory;
-begin
-  simple := TSimpleEdgesFactory.Create(obj.FCanvas);
-  dotted := TDottedEdgesFactory.Create(obj.FCanvas);
-  case kind of
-    SimpleEdge:
-      FObject := simple.GetEdge;
-    SimpleArrowEdge:
-      FObject := simple.GetEdgeArrow;
-    SimpleDoubleArrowEdge:
-      FObject := simple.GetEdgeDoubleArrow;
-    SimpleDoubleLinkedArrowEdge:
-      FObject := simple.GetEdgeLinkedArrow;
-    DottedEdge:
-      FObject := dotted.GetEdge;
-    DottedArrowEdge:
-      FObject := dotted.GetEdgeArrow;
-    DottedDoubleArrowEdge:
-      FObject := dotted.GetEdgeDoubleArrow;
-    DottedDoubleLinkedArrowEdge:
-      FObject := dotted.GetEdgeLinkedArrow;
-    noEdge:
-      FObject := nil;
-  end;
-  getProperties(obj, FObject);
-  FreeAndNil(simple);
-  FreeAndNil(dotted);
-end;
 
 function getAdaptedLine(kind: TTypeEdge; obj: TAbstractEdge): TAbstractEdge;
 var
@@ -92,19 +51,6 @@ begin
   result := resObj;
 end;
 
-procedure TAdaptedEdge.getProperties(const Abstract1: TAbstractEdge; var Abstract2: TAbstractEdge);
-begin
-  Abstract2.FSource := Abstract1.FSource;
-  Abstract2.FTarget := Abstract1.FTarget;
-  Abstract2.FBendPoint[0] := Abstract1.FBendPoint[0];
-  Abstract2.FBendPoint[1] := Abstract1.FBendPoint[1];
-  Abstract2.FBendPoint[2] := Abstract1.FBendPoint[2];
-  Abstract2.FBendModified[0] := Abstract1.FBendModified[0];
-  Abstract2.FBendModified[1] := Abstract1.FBendModified[1];
-  Abstract2.FBendModified[2] := Abstract1.FBendModified[2];
-  Abstract2.Properties.Assign(Abstract1.Properties);
-  Abstract2.ArrowKind := Abstract1.ArrowKind;
-  Abstract2.Inside := Abstract1.Inside;
-end;
+
 
 end.

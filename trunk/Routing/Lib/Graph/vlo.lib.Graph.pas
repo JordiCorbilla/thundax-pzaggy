@@ -35,9 +35,9 @@ interface
 
 uses
   Windows, Messages, Classes, Graphics, Controls, Forms, ExtCtrls, vlo.lib.Node, vlo.lib.Connector, vlo.lib.Edge,
-  vlo.lib.pattern.memento, vlo.lib.properties.Node, vlo.lib.properties.Edge, vlo.lib.Node.list,
-  Menus, vlo.lib.options, vlo.lib.Layout, vlo.lib.grammar, vlo.lib.grammar.production, vlo.lib.properties.Abstract,
-  vlo.lib.pattern.memento.Originator, vlo.lib.pattern.memento.Caretaker;
+  vlo.lib.pattern.memento, vlo.lib.properties.Abstract, vlo.lib.Node.list, vlo.lib.Edge.Abstract,
+  Menus, vlo.lib.options, vlo.lib.Layout, vlo.lib.grammar, vlo.lib.grammar.production,
+  vlo.lib.pattern.memento.Originator, vlo.lib.pattern.memento.Caretaker, vlo.lib.Edge.Factory;
 
 type
   TGraph = Class(TCustomControl)
@@ -82,13 +82,13 @@ type
     procedure MoveIfisLoop(box: TNode; X, Y: Integer);
     procedure SetImageBackground(const Value: String);
   public
-    FDefaultEdgeProperty: TEdgeProperty;
-    FDefaultNodeProperty: TNodeProperty;
-    FDefaultSelectedEdgeProperty: TEdgeProperty;
-    FDefaultSelectedNodeProperty: TNodeProperty;
-    FDefaultOriginNodeProperty: TNodeProperty;
-    FDefaultLinkNodeProperty: TNodeProperty;
-    FDefaultDestinyNodeProperty: TNodeProperty;
+    FDefaultEdgeProperty: TAbstractProperty;
+    FDefaultNodeProperty: TAbstractProperty;
+    FDefaultSelectedEdgeProperty: TAbstractProperty;
+    FDefaultSelectedNodeProperty: TAbstractProperty;
+    FDefaultOriginNodeProperty: TAbstractProperty;
+    FDefaultLinkNodeProperty: TAbstractProperty;
+    FDefaultDestinyNodeProperty: TAbstractProperty;
     nodeList: TNodeList;
     ConnectorList: TConnectorList;
     Rectangle: Boolean;
@@ -235,8 +235,8 @@ implementation
 uses
   sysutils, BoxProperties, LineProperties, vlo.lib.node.alignment, vlo.lib.intersection, Dialogs,
   defaultProperties, iniFiles, vlo.lib.Math, vlo.lib.vertex, vlo.lib.zoom, frmLayout, vlo.lib.Routing.Dijkstra,
-  vlo.lib.Math.Line, defaultSelectProperties,
-  defaultOriginProperties, vlo.lib.font.serializer, jpeg, vlo.lib.resources, XMLDoc, XMLIntf, StrUtils, PerlRegEx;
+  vlo.lib.Math.Line, defaultSelectProperties, vlo.lib.Edge.Points, vlo.lib.properties.Node, vlo.lib.properties.Edge,
+  defaultOriginProperties, vlo.lib.font.serializer, jpeg, vlo.lib.resources, XMLDoc, XMLIntf, StrUtils, RegularExpressions;
 
 { TGraph }
 
@@ -285,7 +285,7 @@ procedure TGraph.AutoFillConnectors;
       con := ConnectorList[i];
       if (con.SourceNode.id = id) and (con.TargetNode.properties.fillColor <> clBlue) then
       begin
-        con.Edge.properties.Description.Text := inttostr(start);
+        TEdgeProperty(con.Edge.properties).Description.Text := inttostr(start);
         start := start + 1;
       end;
     end;
@@ -375,14 +375,14 @@ begin
     FDefaultNodeProperty.fillColor := StrToInt(ini.ReadString('NODE', 'BoxColor', '16777215'));
     FDefaultNodeProperty.LineColor := StrToInt(ini.ReadString('NODE', 'LineColor', '0'));
     FDefaultNodeProperty.SelectedColor := StrToInt(ini.ReadString('NODE', 'SelectedColor', '255'));
-    FDefaultNodeProperty.ColorFontifImage := StrToInt(ini.ReadString('NODE', 'ColorFontifImage', '255'));
-    FDefaultNodeProperty.ColorNodeifImage := StrToInt(ini.ReadString('NODE', 'ColorNodeifImage', '255'));
-    FDefaultNodeProperty.ColorBorderIfImage := StrToInt(ini.ReadString('NODE', 'ColorBorderifImage', '255'));
+    TNodeProperty(FDefaultNodeProperty).ColorFontifImage := StrToInt(ini.ReadString('NODE', 'ColorFontifImage', '255'));
+    TNodeProperty(FDefaultNodeProperty).ColorNodeifImage := StrToInt(ini.ReadString('NODE', 'ColorNodeifImage', '255'));
+    TNodeProperty(FDefaultNodeProperty).ColorBorderIfImage := StrToInt(ini.ReadString('NODE', 'ColorBorderifImage', '255'));
     TFontParser.Deserializer(ini, 'NODE', FDefaultNodeProperty);
 
-    FDefaultEdgeProperty.LenArrow := StrToInt(ini.ReadString('EDGE', 'ArrowLength', '12'));
+    TEdgeProperty(FDefaultEdgeProperty).LenArrow := StrToInt(ini.ReadString('EDGE', 'ArrowLength', '12'));
     FDefaultEdgeProperty.penWidth := StrToInt(ini.ReadString('EDGE', 'PenWidth', '1'));
-    FDefaultEdgeProperty.InclinationAngle := StrToInt(ini.ReadString('EDGE', 'ArrowAngle', '30'));
+    TEdgeProperty(FDefaultEdgeProperty).InclinationAngle := StrToInt(ini.ReadString('EDGE', 'ArrowAngle', '30'));
     FDefaultEdgeProperty.LineColor := StrToInt(ini.ReadString('EDGE', 'LineColor', '0'));
     FDefaultEdgeProperty.Filled := StrToBool(ini.ReadString('EDGE', 'Filled', '0'));
     FDefaultEdgeProperty.fillColor := StrToInt(ini.ReadString('EDGE', 'FillColor', '0'));
@@ -393,14 +393,14 @@ begin
     FDefaultSelectedNodeProperty.fillColor := StrToInt(ini.ReadString('SELECTEDNODE', 'BoxColor', '16777215'));
     FDefaultSelectedNodeProperty.LineColor := StrToInt(ini.ReadString('SELECTEDNODE', 'LineColor', '0'));
     FDefaultSelectedNodeProperty.SelectedColor := StrToInt(ini.ReadString('SELECTEDNODE', 'SelectedColor', '255'));
-    FDefaultSelectedNodeProperty.ColorFontifImage := StrToInt(ini.ReadString('SELECTEDNODE', 'ColorFontifImage', '255'));
-    FDefaultSelectedNodeProperty.ColorNodeifImage := StrToInt(ini.ReadString('SELECTEDNODE', 'ColorNodeifImage', '255'));
-    FDefaultSelectedNodeProperty.ColorBorderIfImage := StrToInt(ini.ReadString('SELECTEDNODE', 'ColorBorderifImage', '255'));
+    TNodeProperty(FDefaultSelectedNodeProperty).ColorFontifImage := StrToInt(ini.ReadString('SELECTEDNODE', 'ColorFontifImage', '255'));
+    TNodeProperty(FDefaultSelectedNodeProperty).ColorNodeifImage := StrToInt(ini.ReadString('SELECTEDNODE', 'ColorNodeifImage', '255'));
+    TNodeProperty(FDefaultSelectedNodeProperty).ColorBorderIfImage := StrToInt(ini.ReadString('SELECTEDNODE', 'ColorBorderifImage', '255'));
     TFontParser.Deserializer(ini, 'SELECTEDNODE', FDefaultSelectedNodeProperty);
 
-    FDefaultSelectedEdgeProperty.LenArrow := StrToInt(ini.ReadString('SELECTEDEDGE', 'ArrowLength', '12'));
+    TEdgeProperty(FDefaultSelectedEdgeProperty).LenArrow := StrToInt(ini.ReadString('SELECTEDEDGE', 'ArrowLength', '12'));
     FDefaultSelectedEdgeProperty.penWidth := StrToInt(ini.ReadString('SELECTEDEDGE', 'PenWidth', '1'));
-    FDefaultSelectedEdgeProperty.InclinationAngle := StrToInt(ini.ReadString('SELECTEDEDGE', 'ArrowAngle', '30'));
+    TEdgeProperty(FDefaultSelectedEdgeProperty).InclinationAngle := StrToInt(ini.ReadString('SELECTEDEDGE', 'ArrowAngle', '30'));
     FDefaultSelectedEdgeProperty.LineColor := StrToInt(ini.ReadString('SELECTEDEDGE', 'LineColor', '0'));
     FDefaultSelectedEdgeProperty.Filled := StrToBool(ini.ReadString('SELECTEDEDGE', 'Filled', '0'));
     FDefaultSelectedEdgeProperty.fillColor := StrToInt(ini.ReadString('SELECTEDEDGE', 'FillColor', '0'));
@@ -411,27 +411,27 @@ begin
     FDefaultOriginNodeProperty.fillColor := StrToInt(ini.ReadString('ORIGINNODE', 'BoxColor', '458496'));
     FDefaultOriginNodeProperty.LineColor := StrToInt(ini.ReadString('ORIGINNODE', 'LineColor', '0'));
     FDefaultOriginNodeProperty.SelectedColor := StrToInt(ini.ReadString('ORIGINNODE', 'SelectedColor', '255'));
-    FDefaultOriginNodeProperty.ColorFontifImage := StrToInt(ini.ReadString('ORIGINNODE', 'ColorFontifImage', '255'));
-    FDefaultOriginNodeProperty.ColorNodeifImage := StrToInt(ini.ReadString('ORIGINNODE', 'ColorNodeifImage', '255'));
-    FDefaultOriginNodeProperty.ColorBorderIfImage := StrToInt(ini.ReadString('ORIGINNODE', 'ColorBorderifImage', '255'));
+    TNodeProperty(FDefaultOriginNodeProperty).ColorFontifImage := StrToInt(ini.ReadString('ORIGINNODE', 'ColorFontifImage', '255'));
+    TNodeProperty(FDefaultOriginNodeProperty).ColorNodeifImage := StrToInt(ini.ReadString('ORIGINNODE', 'ColorNodeifImage', '255'));
+    TNodeProperty(FDefaultOriginNodeProperty).ColorBorderIfImage := StrToInt(ini.ReadString('ORIGINNODE', 'ColorBorderifImage', '255'));
     TFontParser.Deserializer(ini, 'ORIGINNODE', FDefaultOriginNodeProperty);
 
     FDefaultDestinyNodeProperty.penWidth := StrToInt(ini.ReadString('DESTINYNODE', 'PenWidth', '4'));
     FDefaultDestinyNodeProperty.fillColor := StrToInt(ini.ReadString('DESTINYNODE', 'BoxColor', '16318719'));
     FDefaultDestinyNodeProperty.LineColor := StrToInt(ini.ReadString('DESTINYNODE', 'LineColor', '0'));
     FDefaultDestinyNodeProperty.SelectedColor := StrToInt(ini.ReadString('DESTINYNODE', 'SelectedColor', '255'));
-    FDefaultDestinyNodeProperty.ColorFontifImage := StrToInt(ini.ReadString('DESTINYNODE', 'ColorFontifImage', '255'));
-    FDefaultDestinyNodeProperty.ColorNodeifImage := StrToInt(ini.ReadString('DESTINYNODE', 'ColorNodeifImage', '255'));
-    FDefaultDestinyNodeProperty.ColorBorderIfImage := StrToInt(ini.ReadString('DESTINYNODE', 'ColorBorderifImage', '255'));
+    TNodeProperty(FDefaultDestinyNodeProperty).ColorFontifImage := StrToInt(ini.ReadString('DESTINYNODE', 'ColorFontifImage', '255'));
+    TNodeProperty(FDefaultDestinyNodeProperty).ColorNodeifImage := StrToInt(ini.ReadString('DESTINYNODE', 'ColorNodeifImage', '255'));
+    TNodeProperty(FDefaultDestinyNodeProperty).ColorBorderIfImage := StrToInt(ini.ReadString('DESTINYNODE', 'ColorBorderifImage', '255'));
     TFontParser.Deserializer(ini, 'DESTINYNODE', FDefaultDestinyNodeProperty);
 
     FDefaultLinkNodeProperty.penWidth := StrToInt(ini.ReadString('LINKNODE', 'PenWidth', '4'));
     FDefaultLinkNodeProperty.fillColor := StrToInt(ini.ReadString('LINKNODE', 'BoxColor', '33023'));
     FDefaultLinkNodeProperty.LineColor := StrToInt(ini.ReadString('LINKNODE', 'LineColor', '0'));
     FDefaultLinkNodeProperty.SelectedColor := StrToInt(ini.ReadString('LINKNODE', 'SelectedColor', '255'));
-    FDefaultLinkNodeProperty.ColorFontifImage := StrToInt(ini.ReadString('LINKNODE', 'ColorFontifImage', '255'));
-    FDefaultLinkNodeProperty.ColorNodeifImage := StrToInt(ini.ReadString('LINKNODE', 'ColorNodeifImage', '255'));
-    FDefaultLinkNodeProperty.ColorBorderIfImage := StrToInt(ini.ReadString('LINKNODE', 'ColorBorderifImage', '255'));
+    TNodeProperty(FDefaultLinkNodeProperty).ColorFontifImage := StrToInt(ini.ReadString('LINKNODE', 'ColorFontifImage', '255'));
+    TNodeProperty(FDefaultLinkNodeProperty).ColorNodeifImage := StrToInt(ini.ReadString('LINKNODE', 'ColorNodeifImage', '255'));
+    TNodeProperty(FDefaultLinkNodeProperty).ColorBorderIfImage := StrToInt(ini.ReadString('LINKNODE', 'ColorBorderifImage', '255'));
     TFontParser.Deserializer(ini, 'LINKNODE', FDefaultLinkNodeProperty);
   finally
     ini.Free;
@@ -1615,7 +1615,7 @@ begin
     StartDraw := false;
     Rectangle := false;
     mBox.CalcCenter();
-    mBox.properties.zOrder := 999999;
+    TNodeProperty(mbox.properties).zOrder := 999999;
     mBox.CalcPoints();
     nodeList.add(mBox);
     nodeList.Sort(@Compare);
@@ -2429,7 +2429,7 @@ var
   state: string;
   position: Integer;
   ProcessText: string;
-  perl: TPerlRegEx;
+  perl: TRegEx;
 begin
   status := false;
   if not Assigned(stepNode) then
@@ -2452,11 +2452,9 @@ begin
       end
       else if state[1] = '^' then // is a regular expression
       begin
-        perl := TPerlRegEx.Create;
+        perl := TRegEx.Create(UTF8String(state));
         try
-          perl.RegEx := UTF8String(state);
-          perl.Subject := UTF8String(character);
-          if perl.Match then
+          if perl.IsMatch(UTF8String(character)) then
           begin
             RestoreDefaults();
             stepNode := ConnectorList.items[i].TargetNode;
@@ -2465,7 +2463,7 @@ begin
             break;
           end;
         finally
-          perl.Free;
+          //perl.Free;
         end;
       end
       else

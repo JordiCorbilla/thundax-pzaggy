@@ -7,7 +7,7 @@
 			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Platform>Win32</Platform>
 			<AppType>Package</AppType>
-			<FrameworkType>None</FrameworkType>
+			<FrameworkType>VCL</FrameworkType>
 			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -37,6 +37,7 @@
 			<DCC_K>false</DCC_K>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_UnitSearchPath>C:\Program Files (x86)\Borland\SynEdit-2_0_6\SynEdit\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
 			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
@@ -52,50 +53,11 @@
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="rtl.dcp"/>
-			<DCCReference Include="..\Lib\vlo.lib.arrays.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.cloner.contract.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Connector.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Edge.Adapter.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Edge.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.font.serializer.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.fonts.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.GDI.Bitmaps.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.general.application.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.grammar.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.grammar.production.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Graph.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.GUID.Generator.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.intersection.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Layout.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.logging.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Math.Line.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Math.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Math3D.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.MRU.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.node.alignment.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Node.list.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Node.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.options.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.parser.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.path.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.pattern.memento.caretaker.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.pattern.memento.originator.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.pattern.memento.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.properties.abstract.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.properties.Edge.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.properties.Node.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.resources.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.RichEdit.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.Routing.Dijkstra.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.routing.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.text.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.treeLayout.helper.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.treeLayout.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.treeLayout.ReingoldTilford.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.utils.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.vertex.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.XML.Serializer.pas"/>
-			<DCCReference Include="..\Lib\vlo.lib.zoom.pas"/>
+			<DCCReference Include="vclimg.dcp"/>
+			<DCCReference Include="vcl.dcp"/>
+			<DCCReference Include="xmlrtl.dcp"/>
+			<DCCReference Include="VclSmp.dcp"/>
+			<DCCReference Include="SynEdit_R2006.dcp"/>
 			<DCCReference Include="..\Lib\citect\GraphicsBuilder_TLB.pas"/>
 			<DCCReference Include="..\Lib\citect\vlo.lib.citect.dispatcher.pas"/>
 			<DCCReference Include="..\Lib\citect\vlo.lib.citect.element.contract.pas"/>
@@ -104,6 +66,104 @@
 			<DCCReference Include="..\Lib\citect\vlo.lib.citect.painter.contract.pas"/>
 			<DCCReference Include="..\Lib\citect\vlo.lib.citect.painter.pas"/>
 			<DCCReference Include="..\Lib\citect\vlo.lib.citect.properties.pas"/>
+			<DCCReference Include="..\forms\frmLicense.pas">
+				<Form>frmLicenseGPL</Form>
+			</DCCReference>
+			<DCCReference Include="..\forms\ufrmAbout.pas">
+				<Form>frmAbout</Form>
+			</DCCReference>
+			<DCCReference Include="..\forms\ufrmAboutAPP.pas">
+				<Form>frmAboutApp</Form>
+			</DCCReference>
+			<DCCReference Include="..\forms\ufrmDelete.pas">
+				<Form>FormDelete</Form>
+			</DCCReference>
+			<DCCReference Include="..\forms\ufrmLoad.pas">
+				<Form>frmLoad</Form>
+			</DCCReference>
+			<DCCReference Include="..\forms\ufrmParserGraph.pas">
+				<Form>frmParserGraph</Form>
+			</DCCReference>
+			<DCCReference Include="..\forms\ufrmSave.pas">
+				<Form>frmSave</Form>
+			</DCCReference>
+			<DCCReference Include="..\forms\ufrmSplash.pas">
+				<Form>frmSplash</Form>
+			</DCCReference>
+			<DCCReference Include="..\properties\BoxProperties.pas">
+				<Form>frmBoxProp</Form>
+			</DCCReference>
+			<DCCReference Include="..\properties\defaultOriginProperties.pas">
+				<Form>frmOriginProperties</Form>
+			</DCCReference>
+			<DCCReference Include="..\properties\defaultProperties.pas">
+				<Form>frmDefault</Form>
+			</DCCReference>
+			<DCCReference Include="..\properties\defaultSelectProperties.pas">
+				<Form>frmSelectProperties</Form>
+			</DCCReference>
+			<DCCReference Include="..\properties\frmLayout.pas">
+				<Form>fLayout</Form>
+			</DCCReference>
+			<DCCReference Include="..\properties\frmOptions.pas">
+				<Form>fOptions</Form>
+			</DCCReference>
+			<DCCReference Include="..\properties\LineProperties.pas">
+				<Form>frmLineProp</Form>
+			</DCCReference>
+			<DCCReference Include="..\properties\ufrmMemento.pas">
+				<Form>tfrmMemento</Form>
+			</DCCReference>
+			<DCCReference Include="..\Lib\vlo.lib.arrays.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.cloner.contract.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.Connector.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.font.serializer.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.fonts.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.GDI.Bitmaps.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.general.application.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.grammar.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.grammar.production.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.GUID.Generator.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.intersection.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.logging.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.Math.Line.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.Math.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.Math3D.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.MRU.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.options.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.parser.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.path.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.pattern.memento.caretaker.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.pattern.memento.originator.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.pattern.memento.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.resources.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.RichEdit.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.text.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.utils.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.XML.Serializer.pas"/>
+			<DCCReference Include="..\Lib\vlo.lib.zoom.pas"/>
+			<DCCReference Include="..\Lib\Edges\vlo.lib.Edge.Abstract.pas"/>
+			<DCCReference Include="..\Lib\Edges\vlo.lib.Edge.Adapter.pas"/>
+			<DCCReference Include="..\Lib\Edges\vlo.lib.Edge.contracts.pas"/>
+			<DCCReference Include="..\Lib\Edges\vlo.lib.Edge.Dotted.pas"/>
+			<DCCReference Include="..\Lib\Edges\vlo.lib.Edge.Factory.pas"/>
+			<DCCReference Include="..\Lib\Edges\vlo.lib.Edge.pas"/>
+			<DCCReference Include="..\Lib\Edges\vlo.lib.Edge.Points.pas"/>
+			<DCCReference Include="..\Lib\Edges\vlo.lib.Edge.Simple.pas"/>
+			<DCCReference Include="..\Lib\Edges\vlo.lib.vertex.pas"/>
+			<DCCReference Include="..\Lib\Graph\vlo.lib.Graph.pas"/>
+			<DCCReference Include="..\Lib\Layout\vlo.lib.Layout.pas"/>
+			<DCCReference Include="..\Lib\Layout\vlo.lib.Routing.Dijkstra.pas"/>
+			<DCCReference Include="..\Lib\Layout\vlo.lib.routing.pas"/>
+			<DCCReference Include="..\Lib\Layout\vlo.lib.treeLayout.helper.pas"/>
+			<DCCReference Include="..\Lib\Layout\vlo.lib.treeLayout.pas"/>
+			<DCCReference Include="..\Lib\Layout\vlo.lib.treeLayout.ReingoldTilford.pas"/>
+			<DCCReference Include="..\Lib\Nodes\vlo.lib.Node.alignment.pas"/>
+			<DCCReference Include="..\Lib\Nodes\vlo.lib.Node.list.pas"/>
+			<DCCReference Include="..\Lib\Nodes\vlo.lib.Node.pas"/>
+			<DCCReference Include="..\Lib\Properties\vlo.lib.properties.abstract.pas"/>
+			<DCCReference Include="..\Lib\Properties\vlo.lib.properties.Edge.pas"/>
+			<DCCReference Include="..\Lib\Properties\vlo.lib.properties.Node.pas"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
