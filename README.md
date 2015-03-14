@@ -32,3 +32,6 @@ GUI front-end extension of VLO Framework to visually work with Graphs
 [video](http://www.youtube.com/watch?v=hYA9NB0OjpI&feature=player_embedded)
 
 More info on [Random thoughts on coding and technology](http://thundaxsoftware.blogspot.com/search/label/VLO%20Framework) blog.
+
+**Download and test the latest version here:**
+- [ThundaxPZaggy v1.2.0 build 278-Fix](https://app.box.com/s/xw9o5ndpnoiypjz76z9j1mhwhat5pykq)
