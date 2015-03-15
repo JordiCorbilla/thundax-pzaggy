@@ -35,3 +35,8 @@ More info on [Random thoughts on coding and technology](http://thundaxsoftware.b
 
 **Download and test the latest version here:**
 - [ThundaxPZaggy v1.2.0 build 278-Fix](https://app.box.com/s/xw9o5ndpnoiypjz76z9j1mhwhat5pykq)
+
+## Sponsors
+No sponsors yet! Will you be the first?
+
+[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=L5FCF6LX5C9AW "Donate once-off to this project using Paypal")
