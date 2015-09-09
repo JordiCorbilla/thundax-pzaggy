@@ -2,6 +2,9 @@ GUI front-end extension of VLO Framework to visually work with Graphs
 ==============
 **Thundax P-Zaggy is a GUI front-end extension of [VLO Framework](http://sourceforge.net/projects/vloframework/) to visually work with [Graphs](http://en.wikipedia.org/wiki/Graph_(mathematics)) and developed using Delphi XE.**
 --------------
+
+[![Downloads](https://img.shields.io/badge/downloads-2k-blue.svg)](https://app.box.com/s/xw9o5ndpnoiypjz76z9j1mhwhat5pykq) [![Stable Release](https://img.shields.io/badge/version-1.2.0.278-blue.svg)](https://app.box.com/s/xw9o5ndpnoiypjz76z9j1mhwhat5pykq) [![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://app.box.com/s/xw9o5ndpnoiypjz76z9j1mhwhat5pykq) [![Delphi version](https://img.shields.io/badge/delphi-xe-red.svg)](https://app.box.com/s/xw9o5ndpnoiypjz76z9j1mhwhat5pykq)
+
 **P-Zaggy features:**
 
  - [Graph](http://en.wikipedia.org/wiki/Graph_(mathematics)) module (Abstract representation of a set of objects using nodes and edges, visual  properties and layout scripting)
