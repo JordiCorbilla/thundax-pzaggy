@@ -26,8 +26,8 @@ GUI front-end extension of VLO Framework to visually work with Graphs
  - [Finite automata](http://en.wikipedia.org/wiki/Finite-state_machine) module. (Easily build your FA and test them using [Regular Expressions](http://en.wikipedia.org/wiki/Regular_expression) and get the final [regular grammar](http://en.wikipedia.org/wiki/Regular_grammar))
 
 **Examples:**
+- Force-based layout:
 
-*Force-based layout:*
   ![](http://3.bp.blogspot.com/_nWD8gSvCXFk/Sy63Kx33hhI/AAAAAAAACSY/Jhf6OJDd8R4/s400/ThundaxImage.bmp&tmp1=ex2.jpg)
   ![](https://cloud.githubusercontent.com/assets/7347994/16712739/2c77c9ea-4688-11e6-88e3-d0c336b67ba7.gif)
 
