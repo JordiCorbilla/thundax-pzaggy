@@ -12,7 +12,8 @@ GUI front-end extension of VLO Framework to visually work with Graphs
       - Directed graph
       - Weighted graph
       - Trees...
- - [Dijkstra Algorithm](http://en.wikipedia.org/wiki/Dijkstra's_algorithm) (Algorithm that solves the single-source shortest path problem for a graph with nonnegative edge path costs, producing a shortest path tree)
+ 
+- [Dijkstra Algorithm](http://en.wikipedia.org/wiki/Dijkstra's_algorithm) (Algorithm that solves the single-source shortest path problem for a graph with nonnegative edge path costs, producing a shortest path tree)
 
  - [Pathfinding](http://en.wikipedia.org/wiki/Pathfinding) Algorithm (Algorithm that visually finds the paths in a given graph)
 
@@ -26,18 +27,23 @@ GUI front-end extension of VLO Framework to visually work with Graphs
 
 **Examples:**
 
- - *Force-based layout:*
+ -*Force-based layout:*
   ![](http://3.bp.blogspot.com/_nWD8gSvCXFk/Sy63Kx33hhI/AAAAAAAACSY/Jhf6OJDd8R4/s400/ThundaxImage.bmp&tmp1=ex2.jpg)
 
- - *Dijkstra Algorithm:*
+ -*Dijkstra Algorithm:*
   ![](http://4.bp.blogspot.com/_nWD8gSvCXFk/S2h2SpavuUI/AAAAAAAACaA/jVwdR3ZHeaQ/s400/graph4.bmp&tmp2=ex1.jpg)
   [video](http://www.youtube.com/watch?v=4qBXKS2-5M0&feature=player_embedded)
+  
 
- - *PathFinding:*
+ -*PathFinding:*
+ 
   [video](http://www.youtube.com/watch?v=A-nd7teiZNQ&feature=player_embedded)
   
- - *Vijeo Citect module:*
+  
+ -*Vijeo Citect module:*
+ 
   [video](http://www.youtube.com/watch?v=vLQZjk4V6KM&feature=player_embedded)
+  
   
  - *FA and Grammars:*
   ![](http://3.bp.blogspot.com/-v_NcF_WwCu0/Tv3jjqpGf0I/AAAAAAAAC10/TkotxKgwbDs/s1600/grammar3.bmp&tmp=ex.png)
