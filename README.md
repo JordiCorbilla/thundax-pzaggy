@@ -21,23 +21,23 @@ GUI front-end extension of VLO Framework to visually work with Graphs
 
 **Examples:**
 
-  - *Force-based layout:*
- ![](http://3.bp.blogspot.com/_nWD8gSvCXFk/Sy63Kx33hhI/AAAAAAAACSY/Jhf6OJDd8R4/s400/ThundaxImage.bmp&tmp1=ex2.jpg)
+ - *Force-based layout:*
+  ![](http://3.bp.blogspot.com/_nWD8gSvCXFk/Sy63Kx33hhI/AAAAAAAACSY/Jhf6OJDd8R4/s400/ThundaxImage.bmp&tmp1=ex2.jpg)
 
-  - *Dijkstra Algorithm:*
- ![](http://4.bp.blogspot.com/_nWD8gSvCXFk/S2h2SpavuUI/AAAAAAAACaA/jVwdR3ZHeaQ/s400/graph4.bmp&tmp2=ex1.jpg)
- [video](http://www.youtube.com/watch?v=4qBXKS2-5M0&feature=player_embedded)
+ - *Dijkstra Algorithm:*
+  ![](http://4.bp.blogspot.com/_nWD8gSvCXFk/S2h2SpavuUI/AAAAAAAACaA/jVwdR3ZHeaQ/s400/graph4.bmp&tmp2=ex1.jpg)
+  [video](http://www.youtube.com/watch?v=4qBXKS2-5M0&feature=player_embedded)
 
-  - *PathFinding:*
- [video](http://www.youtube.com/watch?v=A-nd7teiZNQ&feature=player_embedded)
+ - *PathFinding:*
+  [video](http://www.youtube.com/watch?v=A-nd7teiZNQ&feature=player_embedded)
   
-- *Vijeo Citect module:*
- [video](http://www.youtube.com/watch?v=vLQZjk4V6KM&feature=player_embedded)
+ - *Vijeo Citect module:*
+  [video](http://www.youtube.com/watch?v=vLQZjk4V6KM&feature=player_embedded)
   
-- *FA and Grammars:*
- ![](http://3.bp.blogspot.com/-v_NcF_WwCu0/Tv3jjqpGf0I/AAAAAAAAC10/TkotxKgwbDs/s1600/grammar3.bmp&tmp=ex.png)
- ![](https://cloud.githubusercontent.com/assets/7347994/16712503/34d42090-4681-11e6-8788-47ef3512dd79.gif)
- [video](http://www.youtube.com/watch?v=hYA9NB0OjpI&feature=player_embedded)
+ - *FA and Grammars:*
+  ![](http://3.bp.blogspot.com/-v_NcF_WwCu0/Tv3jjqpGf0I/AAAAAAAAC10/TkotxKgwbDs/s1600/grammar3.bmp&tmp=ex.png)
+  ![](https://cloud.githubusercontent.com/assets/7347994/16712503/34d42090-4681-11e6-8788-47ef3512dd79.gif)
+  [video](http://www.youtube.com/watch?v=hYA9NB0OjpI&feature=player_embedded)
 
 More info on [Random thoughts on coding and technology](http://thundaxsoftware.blogspot.com/search/label/VLO%20Framework) blog.
 
