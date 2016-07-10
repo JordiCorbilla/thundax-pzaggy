@@ -34,6 +34,7 @@ GUI front-end extension of VLO Framework to visually work with Graphs
 - Dijkstra Algorithm:
 
   ![](http://4.bp.blogspot.com/_nWD8gSvCXFk/S2h2SpavuUI/AAAAAAAACaA/jVwdR3ZHeaQ/s400/graph4.bmp&tmp2=ex1.jpg)
+  ![](https://cloud.githubusercontent.com/assets/7347994/16712784/86a16fd8-4689-11e6-9763-5b372a1ef468.gif)
   [video](http://www.youtube.com/watch?v=4qBXKS2-5M0&feature=player_embedded)
 
 -PathFinding:
