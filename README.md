@@ -13,10 +13,15 @@ GUI front-end extension of VLO Framework to visually work with Graphs
       - Weighted graph
       - Trees...
  - [Dijkstra Algorithm](http://en.wikipedia.org/wiki/Dijkstra's_algorithm) (Algorithm that solves the single-source shortest path problem for a graph with nonnegative edge path costs, producing a shortest path tree)
+
  - [Pathfinding](http://en.wikipedia.org/wiki/Pathfinding) Algorithm (Algorithm that visually finds the paths in a given graph)
+
  - [Vijeo Citect](http://www.schneider-electric.co.uk/sites/uk/en/products-services/automation-control/products-offer/human-machine-interface/hmi-scada-and-historian-software/vijeo-citect.page) module (Vijeo Citect page and genies scanner to automatically build graphs from on-site projects and using the Pathfinding algorithm generate the path's list)
+
  - [Force-Based](http://en.wikipedia.org/wiki/Force-based_algorithms_(graph_drawing)) layout. (algorithm to draw graphs in an aesthetically pleasing way)
+
  - Exporter module (Ongoing and on-demand module to export the results: Excel, txt, etc.)
+
  - [Finite automata](http://en.wikipedia.org/wiki/Finite-state_machine) module. (Easily build your FA and test them using [Regular Expressions](http://en.wikipedia.org/wiki/Regular_expression) and get the final [regular grammar](http://en.wikipedia.org/wiki/Regular_grammar))
 
 **Examples:**
