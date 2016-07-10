@@ -27,25 +27,21 @@ GUI front-end extension of VLO Framework to visually work with Graphs
 
 **Examples:**
 
- - *Force-based layout:*
+*Force-based layout:*
   ![](http://3.bp.blogspot.com/_nWD8gSvCXFk/Sy63Kx33hhI/AAAAAAAACSY/Jhf6OJDd8R4/s400/ThundaxImage.bmp&tmp1=ex2.jpg)
+  ![](https://cloud.githubusercontent.com/assets/7347994/16712739/2c77c9ea-4688-11e6-88e3-d0c336b67ba7.gif)
 
- - *Dijkstra Algorithm:*
+*Dijkstra Algorithm:*
   ![](http://4.bp.blogspot.com/_nWD8gSvCXFk/S2h2SpavuUI/AAAAAAAACaA/jVwdR3ZHeaQ/s400/graph4.bmp&tmp2=ex1.jpg)
   [video](http://www.youtube.com/watch?v=4qBXKS2-5M0&feature=player_embedded)
-  
 
- - *PathFinding:*
- 
+*PathFinding:*
   [video](http://www.youtube.com/watch?v=A-nd7teiZNQ&feature=player_embedded)
-  
-  
- - *Vijeo Citect module:*
- 
+
+*Vijeo Citect module:*
   [video](http://www.youtube.com/watch?v=vLQZjk4V6KM&feature=player_embedded)
-  
-  
- - *FA and Grammars:*
+
+*FA and Grammars:*
   ![](http://3.bp.blogspot.com/-v_NcF_WwCu0/Tv3jjqpGf0I/AAAAAAAAC10/TkotxKgwbDs/s1600/grammar3.bmp&tmp=ex.png)
   ![](https://cloud.githubusercontent.com/assets/7347994/16712503/34d42090-4681-11e6-8788-47ef3512dd79.gif)
   [video](http://www.youtube.com/watch?v=hYA9NB0OjpI&feature=player_embedded)
